@@ -13,6 +13,10 @@
   "Configuration": [{
     "Name": "relayhost",
     "Description": "The next-hop destination of non-local mail"
+  }, {
+    "Name": "smtp_tls_security_level",
+    "Description": "The default SMTP TLS security level for the Postfix SMTP client",
+    "Required": false
   }],
   "HealthChecks": [{
     "Type": "tcp",
