@@ -16,7 +16,7 @@
   }, {
     "Name": "smtp_tls_security_level",
     "Description": "The default SMTP TLS security level for the Postfix SMTP client",
-    "Required": false
+    "Optional": true
   }],
   "HealthChecks": [{
     "Type": "tcp",
