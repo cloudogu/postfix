@@ -23,7 +23,7 @@ postconf -e mynetworks="127.0.0.1 ${NET}"
 postconf -e smtputf8_enable=no
 postconf -e relayhost="${MAILRELAY}"
 postconf -e smtpd_recipient_restrictions="permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination"
-if doguctl config smtp_tls_security_level; then
+if doguctl config smtp_tls_security_level > /dev/null; then
   smtp_tls_security_level=$(doguctl config smtp_tls_security_level)
   postconf -e smtp_tls_security_level="${smtp_tls_security_level}"
 fi
