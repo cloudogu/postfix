@@ -17,6 +17,36 @@
     "Name": "smtp_tls_security_level",
     "Description": "The default SMTP TLS security level for the Postfix SMTP client",
     "Optional": true
+  }, {
+    "Name": "smtp_tls_cert_file",
+    "Description": "File with the Postfix SMTP client RSA certificate in PEM format",
+    "Optional": true,
+    "Encrypted": true
+  }, {
+    "Name": "smtp_tls_key_file",
+    "Description": "File with the Postfix SMTP client RSA private key in PEM format",
+    "Optional": true,
+    "Encrypted": true
+  }, {
+    "Name": "smtp_tls_CAfile",
+    "Description": "A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates",
+    "Optional": true
+  }, {
+    "Name": "smtp_tls_loglevel",
+    "Description": "Enable additional Postfix SMTP client logging of TLS activity",
+    "Optional": true
+  }, {
+    "Name": "smtp_tls_exclude_ciphers",
+    "Description": "List of ciphers or cipher types to exclude from the Postfix SMTP client cipher list at all TLS security levels",
+    "Optional": true
+  }, {
+    "Name": "smtp_tls_mandatory_ciphers",
+    "Description": "The minimum TLS cipher grade that the Postfix SMTP client will use with mandatory TLS encryption",
+    "Optional": true
+  }, {
+    "Name": "smtp_tls_mandatory_protocols",
+    "Description": "List of SSL/TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption",
+    "Optional": true
   }],
   "HealthChecks": [{
     "Type": "tcp",
