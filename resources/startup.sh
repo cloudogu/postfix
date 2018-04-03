@@ -66,7 +66,7 @@ for option in "${OPTIONS[@]}"; do
 done
 
 for option in "${FILE_OPTIONS[@]}"; do
-  writeIntoFileAndSetIfConfigured "${option[@]}"
+  writeIntoFileAndSetIfConfigured ${option[@]}
 done
 
 # START POSTFIX
