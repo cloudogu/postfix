@@ -22,7 +22,7 @@ function writeIntoFileAndSetIfConfigured {
     PARAM=""
   fi
   if doguctl config ${PARAM} ${OPTION_NAME} > /dev/null; then
-    echo $(doguctl config ${PARAM} ${OPTION_NAME}) > ${FILE_NAME}
+    echo "$(doguctl config ${PARAM} ${OPTION_NAME})" > ${FILE_NAME}
     postconf -e ${OPTION_NAME}=${FILE_NAME}
   fi
 }
@@ -66,7 +66,7 @@ for option in "${OPTIONS[@]}"; do
 done
 
 for option in "${FILE_OPTIONS[@]}"; do
-  writeIntoFileAndSetIfConfigured ${option[@]}
+  writeIntoFileAndSetIfConfigured "${option[@]}"
 done
 
 # START POSTFIX
