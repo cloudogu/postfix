@@ -19,16 +19,16 @@
     "Optional": true
   }, {
     "Name": "smtp_tls_cert_file",
-    "Description": "File with the Postfix SMTP client RSA certificate in PEM format",
+    "Description": "Postfix SMTP client RSA certificate in PEM format",
     "Optional": true
   }, {
     "Name": "smtp_tls_key_file",
-    "Description": "File with the Postfix SMTP client RSA private key in PEM format",
+    "Description": "Postfix SMTP client RSA private key in PEM format",
     "Optional": true,
     "Encrypted": true
   }, {
     "Name": "smtp_tls_CAfile",
-    "Description": "A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates",
+    "Description": "CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates",
     "Optional": true
   }, {
     "Name": "smtp_tls_loglevel",
