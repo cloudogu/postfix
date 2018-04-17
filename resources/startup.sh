@@ -35,7 +35,8 @@ OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
 'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'
 'smtp_tls_mandatory_protocols')
 
-CERT_FILE=("smtp_tls_cert_file" "/etc/postfix/cert.pem" "")
+# The content of the cert file is encrypted because it can contain the RSA key (http://www.postfix.org/postconf.5.html#smtp_tls_cert_file)
+CERT_FILE=("smtp_tls_cert_file" "/etc/postfix/cert.pem" "-e")
 KEY_FILE=("smtp_tls_key_file" "/etc/postfix/key.pem" "-e")
 CA_FILE=("smtp_tls_CAfile" "/etc/postfix/CAcert.pem" "")
 # array of entries with format: <config name>, <file name>, <doguctl params>

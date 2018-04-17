@@ -20,7 +20,8 @@
   }, {
     "Name": "smtp_tls_cert_file",
     "Description": "Postfix SMTP client RSA certificate in PEM format",
-    "Optional": true
+    "Optional": true,
+    "Encrypted": true
   }, {
     "Name": "smtp_tls_key_file",
     "Description": "Postfix SMTP client RSA private key in PEM format",
