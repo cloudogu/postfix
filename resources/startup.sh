@@ -5,8 +5,8 @@ set -o pipefail
 
 # 1: value
 function setValueIfConfigured {
-  if doguctl config ${1} > /dev/null; then
-    postconf -e ${1}=$(doguctl config ${1})
+  if doguctl config "${1}" > /dev/null; then
+    postconf -e "${1}"="$(doguctl config "${1}")"
   fi
 }
 
@@ -21,9 +21,9 @@ function writeIntoFileAndSetIfConfigured {
   else
     PARAM=""
   fi
-  if doguctl config ${PARAM} ${OPTION_NAME} > /dev/null; then
-    echo "$(doguctl config ${PARAM} ${OPTION_NAME})" > ${FILE_NAME}
-    postconf -e ${OPTION_NAME}=${FILE_NAME}
+  if doguctl config "${PARAM}" "${OPTION_NAME}" > /dev/null; then
+    doguctl config "${PARAM} ""${OPTION_NAME}" > "${FILE_NAME}"
+    postconf -e "${OPTION_NAME}"="${FILE_NAME}"
   fi
 }
 
@@ -48,8 +48,8 @@ FILE_OPTIONS=(
 
 # GATHERING NETWORKS FROM INTERFACES FOR MYNETWORKS
 for i in $(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern| awk '{print $1}' | xargs); do
-  MASK=$(netstat -nr | grep ${i} | awk '{print $3}')
-  CIDR=$(/mask2cidr.sh ${MASK})
+  MASK=$(netstat -nr | grep "${i}" | awk '{print $3}')
+  CIDR=$(/mask2cidr.sh "${MASK}")
   NET="${NET} ${i}/${CIDR}"
 done
 
@@ -67,7 +67,7 @@ for option in "${OPTIONS[@]}"; do
 done
 
 for option in "${FILE_OPTIONS[@]}"; do
-  writeIntoFileAndSetIfConfigured ${option[@]}
+  writeIntoFileAndSetIfConfigured "${option[@]}"
 done
 
 # START POSTFIX
