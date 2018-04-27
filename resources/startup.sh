@@ -13,6 +13,7 @@ function setValueIfConfigured {
 # 1: config name
 # 2: file name
 # 3: doguctl params
+# This also changes the mod of the file to 600
 function writeIntoFileAndSetIfConfigured {
   OPTION_NAME="${1}"
   FILE_NAME="${2}"
@@ -21,8 +22,10 @@ function writeIntoFileAndSetIfConfigured {
   else
     PARAM=""
   fi
-  if doguctl config "${PARAM}" "${OPTION_NAME}" > /dev/null; then
-    doguctl config "${PARAM} ""${OPTION_NAME}" > "${FILE_NAME}"
+  if doguctl config "${OPTION_NAME}" > /dev/null; then
+    # PARAM should not be in double quotes because it can be empty
+    doguctl config ${PARAM} "${OPTION_NAME}" > "${FILE_NAME}"
+    chmod 600 "${FILE_NAME}"
     postconf -e "${OPTION_NAME}"="${FILE_NAME}"
   fi
 }
@@ -34,17 +37,6 @@ NET=""
 OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
 'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'
 'smtp_tls_mandatory_protocols')
-
-# The content of the cert file is encrypted because it can contain the RSA key (http://www.postfix.org/postconf.5.html#smtp_tls_cert_file)
-CERT_FILE=("smtp_tls_cert_file" "/etc/postfix/cert.pem" "-e")
-KEY_FILE=("smtp_tls_key_file" "/etc/postfix/key.pem" "-e")
-CA_FILE=("smtp_tls_CAfile" "/etc/postfix/CAcert.pem" "")
-# array of entries with format: <config name>, <file name>, <doguctl params>
-FILE_OPTIONS=(
-    "${CERT_FILE[*]}"
-    "${KEY_FILE[*]}"
-    "${CA_FILE[*]}"
-)
 
 # GATHERING NETWORKS FROM INTERFACES FOR MYNETWORKS
 for i in $(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern| awk '{print $1}' | xargs); do
@@ -66,9 +58,10 @@ for option in "${OPTIONS[@]}"; do
   setValueIfConfigured "${option}"
 done
 
-for option in "${FILE_OPTIONS[@]}"; do
-  writeIntoFileAndSetIfConfigured "${option[@]}"
-done
+# The content of the cert file is encrypted because it can contain the RSA key (http://www.postfix.org/postconf.5.html#smtp_tls_cert_file)
+writeIntoFileAndSetIfConfigured "smtp_tls_cert_file" "/etc/postfix/cert.pem" "-e"
+writeIntoFileAndSetIfConfigured "smtp_tls_key_file" "/etc/postfix/key.pem" "-e"
+writeIntoFileAndSetIfConfigured "smtp_tls_CAfile" "/etc/postfix/CAcert.pem"
 
 # START POSTFIX
 exec /usr/bin/supervisord -c /etc/supervisord.conf
