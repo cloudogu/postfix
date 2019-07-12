@@ -1,5 +1,5 @@
-FROM registry.cloudogu.com/official/base:3.7-4
-MAINTAINER Stephan Christann <stephan.christann@cloudogu.com>
+FROM registry.cloudogu.com/official/base:3.9.4-1
+LABEL maintainer=robert.auer@cloudogu.com
 
 # INSTALL POSTFIX
 RUN apk add --update postfix openrc supervisor rsyslog \
