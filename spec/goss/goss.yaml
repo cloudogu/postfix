@@ -38,7 +38,7 @@ user:
     - mail
     - postfix
     home: /var/spool/postfix
-    shell: /bin/false
+    shell: /sbin/nologin
 group:
   postfix:
     exists: true
