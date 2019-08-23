@@ -65,3 +65,4 @@ writeIntoFileAndSetIfConfigured "smtp_tls_CAfile" "/etc/postfix/CAcert.pem"
 
 # START POSTFIX
 exec /usr/bin/supervisord -c /etc/supervisord.conf
+
