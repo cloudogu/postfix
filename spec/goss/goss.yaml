@@ -1,19 +1,16 @@
 file:
   /etc/supervisord.conf:
     exists: true
-    mode: "0644"
     owner: root
     group: root
     filetype: file
   /mask2cidr.sh:
     exists: true
-    mode: "0755"
     owner: root
     group: root
     filetype: file
   /startup.sh:
     exists: true
-    mode: "0755"
     owner: root
     group: root
     filetype: file
