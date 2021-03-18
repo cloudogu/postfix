@@ -24,7 +24,7 @@ function writeIntoFileAndSetIfConfigured {
   fi
   if doguctl config "${OPTION_NAME}" > /dev/null; then
     # PARAM should not be in double quotes because it can be empty
-    doguctl config ${PARAM} "${OPTION_NAME}" > "${FILE_NAME}"
+    doguctl config "${PARAM}" "${OPTION_NAME}" > "${FILE_NAME}"
     chmod 600 "${FILE_NAME}"
     postconf -e "${OPTION_NAME}"="${FILE_NAME}"
   fi
