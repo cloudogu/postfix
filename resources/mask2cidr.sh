@@ -4,7 +4,6 @@
 #
 mask2cidr() {
     nbits=0
-    IFS=.
     for dec in $1 ; do
         case $dec in
             255) (( nbits+=8 ));;
@@ -25,6 +24,6 @@ mask2cidr() {
 ## main ##
 # MASK=255.255.254.0
 MASK=$1
-numbits=$(mask2cidr "$MASK")
+numbits=$(IFS=. ; mask2cidr "$MASK")
 echo "$numbits"
 exit 0
