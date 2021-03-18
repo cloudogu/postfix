@@ -12,5 +12,7 @@ COPY resources /
 # POSTFIX PORT
 EXPOSE 25/tcp 587/tcp
 
+HEALTHCHECK CMD doguctl healthy postfix || exit 1
+
 # FIRE IT UP
 CMD ["/bin/bash", "-c", "/startup.sh"]
