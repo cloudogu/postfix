@@ -1,19 +1,19 @@
 #!groovy
-@Library(['github.com/cloudogu/ces-build-lib@1.44.3', 'github.com/cloudogu/dogu-build-lib@v1.1.1'])
+@Library(['github.com/cloudogu/ces-build-lib@1.45.1', 'github.com/cloudogu/dogu-build-lib@v1.1.1'])
 import com.cloudogu.ces.cesbuildlib.*
 import com.cloudogu.ces.dogubuildlib.*
 
-node('docker'){
-        stage('Checkout') {
-            checkout scm
-        }
+node('docker') {
+    stage('Checkout') {
+        checkout scm
+    }
 
-        stage('Lint') {
-            lintDockerfile()
-        }
+    stage('Lint') {
+        lintDockerfile()
+    }
 
-        stage('Shellcheck'){
-           shellCheck()
+    stage('Shellcheck') {
+        shellCheck()
     }
 }
 node('vagrant') {
@@ -24,7 +24,7 @@ node('vagrant') {
     GitHub github = new GitHub(this, git)
     Changelog changelog = new Changelog(this)
 
-    timestamps{
+    timestamps {
         properties([
                 // Keep only the last x builds to preserve space
                 buildDiscarder(logRotator(numToKeepStr: '10')),
@@ -65,7 +65,7 @@ node('vagrant') {
                     ecoSystem.push("/dogu")
                 }
 
-                stage ('Add Github-Release'){
+                stage('Add Github-Release') {
                     github.createReleaseWithChangelog(releaseVersion, changelog)
                 }
             }
