@@ -1,7 +1,7 @@
 FROM registry.cloudogu.com/official/base:3.12.4-1
 LABEL name="official/postfix" \
       version="3.3.2-1" \
-      maintainer=info@cloudogu.com
+      maintainer=hello@cloudogu.com
 
 # INSTALL POSTFIX
 RUN apk add --update postfix openrc supervisor rsyslog \
