@@ -1,55 +1,68 @@
 {
   "Name": "official/postfix",
-  "Version": "3.2.4-1",
+  "Version": "3.5.9-1",
   "DisplayName": "Postfix",
   "Description": "Postfix - Mail Transfer Agent",
   "Logo": "https://cloudogu.com/images/dogus/postfix.png",
   "Category": "Base",
   "Tags": [
-    "mail", "smtp"
+    "mail",
+    "smtp"
   ],
   "Url": "http://www.postfix.org/",
   "Image": "registry.cloudogu.com/official/postfix",
-  "Configuration": [{
-    "Name": "relayhost",
-    "Description": "The next-hop destination of non-local mail"
-  }, {
-    "Name": "smtp_tls_security_level",
-    "Description": "The default SMTP TLS security level for the Postfix SMTP client",
-    "Optional": true
-  }, {
-    "Name": "smtp_tls_cert_file",
-    "Description": "Postfix SMTP client RSA certificate in PEM format",
-    "Optional": true,
-    "Encrypted": true
-  }, {
-    "Name": "smtp_tls_key_file",
-    "Description": "Postfix SMTP client RSA private key in PEM format",
-    "Optional": true,
-    "Encrypted": true
-  }, {
-    "Name": "smtp_tls_CAfile",
-    "Description": "CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates",
-    "Optional": true
-  }, {
-    "Name": "smtp_tls_loglevel",
-    "Description": "Enable additional Postfix SMTP client logging of TLS activity",
-    "Optional": true
-  }, {
-    "Name": "smtp_tls_exclude_ciphers",
-    "Description": "List of ciphers or cipher types to exclude from the Postfix SMTP client cipher list at all TLS security levels",
-    "Optional": true
-  }, {
-    "Name": "smtp_tls_mandatory_ciphers",
-    "Description": "The minimum TLS cipher grade that the Postfix SMTP client will use with mandatory TLS encryption",
-    "Optional": true
-  }, {
-    "Name": "smtp_tls_mandatory_protocols",
-    "Description": "List of SSL/TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption",
-    "Optional": true
-  }],
-  "HealthChecks": [{
-    "Type": "tcp",
-    "Port": 25
-  }]
+  "Configuration": [
+    {
+      "Name": "relayhost",
+      "Description": "The next-hop destination of non-local mail"
+    },
+    {
+      "Name": "smtp_tls_security_level",
+      "Description": "The default SMTP TLS security level for the Postfix SMTP client",
+      "Optional": true
+    },
+    {
+      "Name": "smtp_tls_cert_file",
+      "Description": "Postfix SMTP client RSA certificate in PEM format",
+      "Optional": true,
+      "Encrypted": true
+    },
+    {
+      "Name": "smtp_tls_key_file",
+      "Description": "Postfix SMTP client RSA private key in PEM format",
+      "Optional": true,
+      "Encrypted": true
+    },
+    {
+      "Name": "smtp_tls_CAfile",
+      "Description": "CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates",
+      "Optional": true
+    },
+    {
+      "Name": "smtp_tls_loglevel",
+      "Description": "Enable additional Postfix SMTP client logging of TLS activity",
+      "Optional": true
+    },
+    {
+      "Name": "smtp_tls_exclude_ciphers",
+      "Description": "List of ciphers or cipher types to exclude from the Postfix SMTP client cipher list at all TLS security levels",
+      "Optional": true
+    },
+    {
+      "Name": "smtp_tls_mandatory_ciphers",
+      "Description": "The minimum TLS cipher grade that the Postfix SMTP client will use with mandatory TLS encryption",
+      "Optional": true
+    },
+    {
+      "Name": "smtp_tls_mandatory_protocols",
+      "Description": "List of SSL/TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption",
+      "Optional": true
+    }
+  ],
+  "HealthChecks": [
+    {
+      "Type": "tcp",
+      "Port": 25
+    }
+  ]
 }
