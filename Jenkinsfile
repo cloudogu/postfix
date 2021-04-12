@@ -41,7 +41,7 @@ node('vagrant') {
 
 
         EcoSystem ecoSystem = new EcoSystem(this, "gcloud-ces-operations-internal-packer", "jenkins-gcloud-ces-operations-internal")
-
+        Vagrant vagrant = new Vagrant(this, "gcloud-ces-operations-internal-packer", "jenkins-gcloud-ces-operations-internal")
 
         try {
 
@@ -51,7 +51,7 @@ node('vagrant') {
 
             stage('Setup') {
                 ecoSystem.loginBackend('cesmarvin-setup')
-                ecoSystem.setup()
+                ecoSystem.setup(additionalDependencies: ['official/scm'])
             }
 
             stage('Build') {
@@ -67,6 +67,8 @@ node('vagrant') {
                     // Remove new dogu that has been built and tested above
                     ecoSystem.purgeDogu(doguName)
 
+                    vagrant.ssh('etcdctl set /config/postfix/relayhost mail.ces.local')
+
                     if (params.OldDoguVersionForUpgradeTest != '' && !params.OldDoguVersionForUpgradeTest.contains('v')){
                         println "Installing user defined version of dogu: " + params.OldDoguVersionForUpgradeTest
                         ecoSystem.installDogu("official/" + doguName + " " + params.OldDoguVersionForUpgradeTest)
@@ -80,11 +82,6 @@ node('vagrant') {
 
                     // Wait for upgraded dogu to get healthy
                     ecoSystem.waitForDogu(doguName)
-                }
-
-                stage('Integration Tests - After Upgrade') {
-                    // Run integration tests again to verify that the upgrade was successful
-                    ecoSystem.runYarnIntegrationTests(15, 'node:8.14.0-stretch', [], params.EnableVideoRecording)
                 }
             }
 
