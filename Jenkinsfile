@@ -67,6 +67,7 @@ node('vagrant') {
                     // Remove new dogu that has been built and tested above
                     ecoSystem.purgeDogu(doguName)
 
+                    // Set etcd entry required for postfix. This entry was removed during the previous purge.
                     vagrant.ssh('etcdctl set /config/postfix/relayhost mail.ces.local')
 
                     if (params.OldDoguVersionForUpgradeTest != '' && !params.OldDoguVersionForUpgradeTest.contains('v')){
