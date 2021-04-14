@@ -51,7 +51,7 @@ node('vagrant') {
 
             stage('Setup') {
                 ecoSystem.loginBackend('cesmarvin-setup')
-                ecoSystem.setup(additionalDependencies: ['official/scm'])
+                ecoSystem.setup()
             }
 
             stage('Build') {
