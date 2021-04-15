@@ -25,6 +25,7 @@ node('vagrant') {
     Changelog changelog = new Changelog(this)
 
     String doguName = "postfix"
+    String relayhost = 'mail.ces.local'
 
     timestamps {
         properties([
@@ -62,23 +63,24 @@ node('vagrant') {
                 ecoSystem.verify("/dogu")
             }
 
+            stage('Integration tests') {
+                purgeAndReinstallDogu(ecoSystem, vagrant, doguName,'', relayhost)
+
+                println "read postfix configuration"
+                mainConfigContent = vagrant.sshOut("sudo docker exec postfix cat /etc/postfix/main.cf")
+
+                if (mainConfigContent.contains('relayhost = ' + relayhost)) {
+                    println "Relay host is configured correctly."
+                } else {
+                    unstable('Configured relay host of postfix is not as expected.')
+                }
+            }
+
             if (params.TestDoguUpgrade != null && params.TestDoguUpgrade){
                 stage('Upgrade dogu') {
-                    // Remove new dogu that has been built and tested above
-                    ecoSystem.purgeDogu(doguName)
+                    String doguVersionForUpgradeTest = params.OldDoguVersionForUpgradeTest
+                    purgeAndReinstallDogu(ecoSystem, vagrant, doguName, doguVersionForUpgradeTest, relayhost)
 
-                    // Set etcd entry required for postfix. This entry was removed during the previous purge.
-                    vagrant.ssh('etcdctl set /config/postfix/relayhost mail.ces.local')
-
-                    if (params.OldDoguVersionForUpgradeTest != '' && !params.OldDoguVersionForUpgradeTest.contains('v')){
-                        println "Installing user defined version of dogu: " + params.OldDoguVersionForUpgradeTest
-                        ecoSystem.installDogu("official/" + doguName + " " + params.OldDoguVersionForUpgradeTest)
-                    } else {
-                        println "Installing latest released version of dogu..."
-                        ecoSystem.installDogu("official/" + doguName)
-                    }
-                    ecoSystem.startDogu(doguName)
-                    ecoSystem.waitForDogu(doguName)
                     ecoSystem.upgradeDogu(ecoSystem)
 
                     // Wait for upgraded dogu to get healthy
@@ -110,5 +112,20 @@ node('vagrant') {
     }
 }
 
+void purgeAndReinstallDogu(EcoSystem ecoSystem, Vagrant vagrant, String doguName, String doguVersionToInstall, String relayhost) {
+    ecoSystem.purgeDogu(doguName)
 
+    // Set etcd entry required for postfix. This entry was removed during the previous purge.
+    vagrant.ssh('etcdctl set /config/postfix/relayhost ' + relayhost)
 
+    if (doguVersionToInstall != '' && !doguVersionToInstall.contains('v')){
+        println "Installing user defined version of dogu: " + params.OldDoguVersionForUpgradeTest
+        ecoSystem.installDogu("official/" + doguName + " " + params.OldDoguVersionForUpgradeTest)
+    } else {
+        println "Installing latest released version of dogu..."
+        ecoSystem.installDogu("official/" + doguName)
+    }
+
+    ecoSystem.startDogu(doguName)
+    ecoSystem.waitForDogu(doguName)
+}
