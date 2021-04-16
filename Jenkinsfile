@@ -60,7 +60,6 @@ node('vagrant') {
             }
 
             stage('Verify') {
-                sleep 30
                 ecoSystem.verify("/dogu")
             }
 
