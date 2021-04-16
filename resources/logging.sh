@@ -7,7 +7,8 @@ set -o pipefail
 DEFAULT_LOGGING_KEY="logging/root"
 DEFAULT_LOG_LEVEL="WARN"
 
-export POSTFIX_LOGLEVEL=$(doguctl config --default "${DEFAULT_LOG_LEVEL}" "${DEFAULT_LOGGING_KEY}")
+POSTFIX_LOGLEVEL=$(doguctl config --default "${DEFAULT_LOG_LEVEL}" "${DEFAULT_LOGGING_KEY}")
+export POSTFIX
 
 # logging configuration used to configure the rsyslog logging mechanism
 POSTFIX_LOGGING_TEMPLATE="/etc/rsyslog.conf.tpl"
