@@ -11,8 +11,12 @@ POSTFIX_LOGLEVEL=$(doguctl config --default "${DEFAULT_LOG_LEVEL}" "${DEFAULT_LO
 export POSTFIX_LOGLEVEL
 
 # logging configuration used to configure the rsyslog logging mechanism
-POSTFIX_LOGGING_TEMPLATE="/etc/rsyslog.conf.tpl"
-POSTFIX_LOGGING="/etc/rsyslog.conf"
+RSYSLOG_LOGGING_TEMPLATE="/etc/rsyslog.conf.tpl"
+RSYSLOG_LOGGING="/etc/rsyslog.conf"
+
+# config file for supervisor which contains a loglevel configuration
+SUPERVISOR_CONF_TEMPLATE="/etc/supervisord.conf.tpl"
+SUPERVISOR_CONF="/etc/supervisord.conf"
 
 SCRIPT_LOG_PREFIX="Log level mapping:"
 function validateDoguLogLevel() {
@@ -33,5 +37,6 @@ function validateDoguLogLevel() {
 validateDoguLogLevel
 
 echo "Rendering logging configuration..."
-doguctl template ${POSTFIX_LOGGING_TEMPLATE} ${POSTFIX_LOGGING}
+doguctl template ${RSYSLOG_LOGGING_TEMPLATE} ${RSYSLOG_LOGGING}
+doguctl template ${SUPERVISOR_CONF_TEMPLATE} ${SUPERVISOR_CONF}
 
