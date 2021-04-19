@@ -7,9 +7,8 @@ set -o pipefail
 DEFAULT_LOGGING_KEY="logging/root"
 DEFAULT_LOG_LEVEL="WARN"
 
-# shellcheck disable=SC2034  # variable is exported and used in logging template
 POSTFIX_LOGLEVEL=$(doguctl config --default "${DEFAULT_LOG_LEVEL}" "${DEFAULT_LOGGING_KEY}")
-export POSTFIX
+export POSTFIX_LOGLEVEL
 
 # logging configuration used to configure the rsyslog logging mechanism
 POSTFIX_LOGGING_TEMPLATE="/etc/rsyslog.conf.tpl"
