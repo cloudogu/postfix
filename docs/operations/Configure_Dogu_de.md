@@ -1,8 +1,13 @@
+---
+title: "Konfiguration des Postfix-Dogu"
+---
+
+
 # Konfiguration des Postfix-Dogu
 
 ## Voraussetzung
 
-* Das Postfix-Dogu ist erfolgreich [installiert](Install_Dogu_de.md)
+* Das Postfix-Dogu ist erfolgreich [installiert](Install_Postfix_de.md)
 
 ## Konfigurationsmöglichkeiten
 

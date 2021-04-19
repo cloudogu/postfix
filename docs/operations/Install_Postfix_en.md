@@ -1,4 +1,8 @@
-# Installation of the Postfix Dogu
+---
+title: "Installation of the Postfix dogu"
+---
+
+# Installation of the Postfix dogu
 
 ## Prerequisite
 

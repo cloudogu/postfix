@@ -1,4 +1,8 @@
-# Postfjx documentation
+---
+title: "Getting Started"
+---
+
+# Postfix documentation
 
 ## Guides
 
