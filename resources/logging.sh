@@ -5,7 +5,7 @@ set -o pipefail
 
 # logging behaviour can be configured in logging/root with the following options <ERROR,WARN,INFO,DEBUG>
 DEFAULT_LOGGING_KEY="logging/root"
-DEFAULT_LOG_LEVEL="WARN"
+DEFAULT_LOG_LEVEL="INFO"
 
 POSTFIX_LOGLEVEL=$(doguctl config --default "${DEFAULT_LOG_LEVEL}" "${DEFAULT_LOGGING_KEY}")
 export POSTFIX_LOGLEVEL
