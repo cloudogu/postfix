@@ -2,7 +2,6 @@
 title: "Konfiguration des Postfix-Dogu"
 ---
 
-
 # Konfiguration des Postfix-Dogu
 
 ## Voraussetzung
@@ -104,7 +103,7 @@ Postfix-Dogu bietet die folgenden Einstellungen:
 
 #### Physisches Swaplimit
 
-* Konfigurations-Schlüssel-Pfad: `container_config/swap_limit`
+* fad des Konfigurationsschlüssels: `container_config/swap_limit`
 * Inhalt: Beschränkt den Swap des Docker-Containers für das Postfix-Dogu
 * Datentyp: Binäre Speicherangabe
 * Valide Werte: Ganzzahl gefolgt von [b,k,m,g] (byte, kibibyte, mebibyte, gibibyte)
