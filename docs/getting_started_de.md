@@ -11,4 +11,5 @@ title: "Getting Started"
 
 ## Für Entwickler
 
+- [Entwickler-Guide](development/Developers_Guide_de.md)
 - [Lokaler Mailversand](development/Send_Mails_locally_de.md)
