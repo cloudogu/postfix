@@ -1,0 +1,5 @@
+{
+  "mailHogBaseUrl": "http://localhost:8025",
+  "videoUploadOnPasses": true,
+  "videoCompression": false
+}
