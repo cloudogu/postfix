@@ -14,6 +14,7 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+import './commands/dogu_commands'
 import './commands/mailhog_commands'
 
 // Alternatively you can use CommonJS syntax:
