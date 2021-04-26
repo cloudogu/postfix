@@ -25,7 +25,6 @@ node('vagrant') {
     Changelog changelog = new Changelog(this)
 
     String doguName = "postfix"
-    String relayhost = 'mail.ces.local'
 
     timestamps {
         properties([
@@ -61,19 +60,6 @@ node('vagrant') {
 
             stage('Verify') {
                 ecoSystem.verify("/dogu")
-            }
-
-            stage('Integration tests') {
-                purgeAndReinstallDogu(ecoSystem, vagrant, doguName,'', relayhost)
-
-                println "read postfix configuration"
-                mainConfigContent = vagrant.sshOut("sudo docker exec postfix cat /etc/postfix/main.cf")
-
-                if (mainConfigContent.contains('relayhost = ' + relayhost)) {
-                    println "Relay host is configured correctly."
-                } else {
-                    unstable('Configured relay host of postfix is not as expected.')
-                }
             }
 
             if (params.TestDoguUpgrade != null && params.TestDoguUpgrade){

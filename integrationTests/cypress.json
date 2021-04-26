@@ -1,6 +1,0 @@
-{
-  "mailHogBaseUrl": "http://localhost:8025",
-  "vagrantMachineID": "",
-  "videoUploadOnPasses": true,
-  "videoCompression": false
-}
