@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.5.9-2] - 2021-05-06
+### Added
+- Upgrade test of the Dogu in Jenkins pipeline (#7)
+- Possibility to set log level for the dogu (#7)
+- Possibility to set memory limit for the dogu (#7)
+ 
 ## [v3.5.9-1] - 2021-03-22
 ### Added
 - release workflow
