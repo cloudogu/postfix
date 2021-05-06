@@ -8,6 +8,5 @@ $FileCreateMode 0640
 $DirCreateMode 0755
 $Umask 0022
 
-#*.info							/dev/stdout
-#mail.*							/dev/stdout
-mail.info /dev/stdout
+# configuration for mail (postfix)
+mail.{{ .Env.Get "POSTFIX_LOGLEVEL" }} /dev/stdout

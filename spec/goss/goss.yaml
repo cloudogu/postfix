@@ -4,6 +4,16 @@ file:
     owner: root
     group: root
     filetype: file
+  /etc/rsyslog.conf:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  /logging.sh:
+    exists: true
+    owner: root
+    group: root
+    filetype: file
   /mask2cidr.sh:
     exists: true
     owner: root

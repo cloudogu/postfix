@@ -18,6 +18,21 @@
 
 **Category:** Base Dogu 
 
+---
+
+### How to install Postfix?
+
+- [Installation des Postfix-Dogu](docs/operations/Install_Postfix_de.md)
+- [Installing the Postfix dogu](docs/operations/Install_Postfix_en.md)
+
+### Where do I find more information about the Portainer dogu?
+
+- [Deutsch] [Dokumentation](docs/getting_started_de.md)
+- [English] [Documentation](docs/getting_started_en.md)
+
+---
+
+
 ## Installation Ecosystem
 ```
 cesapp install official/postfix
