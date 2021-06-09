@@ -1,7 +1,7 @@
 <img src="https://cloudogu.com/images/dogus/postfix.png" alt="postfix logo" height="100px">
 
 
-[![GitHub license](https://img.shields.io/github/license/cloudogu/postfix.svg)](https://github.com/cloudogu/postfix/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/cloudogu/postfix.svg)](https://github.com/cloudogu/postfix/blob/develop/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/cloudogu/postfix.svg)](https://github.com/cloudogu/postfix/releases)
 
 # Postfix Dogu
