@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [v3.5.9-3] - 2022-02-10
+## [v3.6.4-1] - 2022-02-10
 ### Fixed
 - XML-Parser Expat (CVE-2022-23852) security issue
 
