@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.5.9-3] - 2022-02-09
+### Fixed
+- XML-Parser Expat (CVE-2022-23852) security issue
+
 ## [v3.5.9-2] - 2021-05-06
 ### Added
 - Upgrade test of the Dogu in Jenkins pipeline (#7)
