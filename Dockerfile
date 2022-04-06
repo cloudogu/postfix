@@ -1,11 +1,16 @@
-FROM registry.cloudogu.com/official/base:3.15.0-1
-LABEL name="official/postfix" \
-      version="3.6.4-1" \
+FROM registry.cloudogu.com/official/base:3.15.3-1
+LABEL NAME="official/postfix" \
+      VERSION="3.6.4-2" \
       maintainer=hello@cloudogu.com
 
 # INSTALL POSTFIX
-RUN apk add --update postfix openrc supervisor rsyslog \
-	&& rm -rf /var/cache/apk/*
+RUN set -o errexit \
+  && set -o nounset \
+  && set -o pipefail \
+  && apk update \
+  && apk upgrade \
+  && apk add --update postfix openrc supervisor rsyslog \
+  && rm -rf /var/cache/apk/*
 
 COPY resources /
 
