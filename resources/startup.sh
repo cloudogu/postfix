@@ -33,8 +33,8 @@ function writeIntoFileAndSetIfConfigured {
 MAILRELAY=$(doguctl config relayhost)
 NAME=$(hostname)
 DOMAIN=$(doguctl config --global domain)
-POSFIX_SASL_USER=$(doguctl config sasl_username)
-POSFIX_SASL_PASSWORD=$(doguctl config sasl_password)
+POSTFIX_SASL_USER=$(doguctl config --default "NOT_SET" sasl_username)
+POSTFIX_SASL_PASSWORD=$(doguctl config --default "NOT_SET" sasl_password)
 NET=""
 OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
 'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'
@@ -60,7 +60,7 @@ postconf -e smtpd_recipient_restrictions="permit_mynetworks,permit_sasl_authenti
 
 
 # check if SASL authentication should be configured
-if [ -n "${POSFIX_SASL_USER}" ] && [ -n "${POSFIX_SASL_PASSWORD}" ]; then
+if [ "${POSTFIX_SASL_USER}" != "NOT_SET" ] && [ "${POSTFIX_SASL_PASSWORD}" != "NOT_SET" ]; then
       echo "found SASL pw and user ... configure Postfix to use SASL authentication"
 
       # SASL security in postfix
