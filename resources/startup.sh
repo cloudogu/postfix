@@ -33,6 +33,8 @@ function writeIntoFileAndSetIfConfigured {
 MAILRELAY=$(doguctl config relayhost)
 NAME=$(hostname)
 DOMAIN=$(doguctl config --global domain)
+POSFIX_SASL_USER=$(doguctl config username)
+POSFIX_SASL_PASSWORD=$(doguctl config password)
 NET=""
 OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
 'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'
@@ -45,14 +47,36 @@ for i in $(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern| awk '{print $
   NET="${NET} ${i}/${CIDR}"
 done
 
+echo "start Postfix configuration ..."
+
 # POSTFIX CONFIG
+postconf -e relayhost="${MAILRELAY}"
 postconf -e mydomain="localhost.local"
 postconf -e myhostname="${NAME}.${DOMAIN}"
 postconf -e mydestination="${NAME}.${DOMAIN}, localhost.localdomain, localhost"
 postconf -e mynetworks="127.0.0.1 ${NET}"
 postconf -e smtputf8_enable=no
-postconf -e relayhost="${MAILRELAY}"
 postconf -e smtpd_recipient_restrictions="permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination"
+
+
+
+# check if SASL authentication should be configured
+if [ -n "${POSFIX_SASL_USER}" ] && [ -n "${POSFIX_SASL_PASSWORD}" ]; then
+      echo "found SASL pw and user ... configure Postfix to use SASL authentication"
+
+      # SASL security in postfix
+      echo "${MAILRELAY} ${POSFIX_SASL_USER}:${POSFIX_SASL_PASSWORD}"> /etc/postfix/sasl_passwd
+      postmap /etc/postfix/sasl_passwd
+
+      postconf -e smtp_sasl_auth_enable="yes" # enable SASL authentication in the Postfix SMTP client. By default, the Postfix SMTP client uses no authentication.
+      postconf -e smtp_sasl_security_options="noanonymous" # removes the prohibition on plaintext password
+      postconf -e smtp_sasl_password_maps="lmdb:/etc/postfix/sasl_passwd" #hash:/ is deprecated using lmdb:/ instead
+      # postconf -e smtp_tls_security_level="encrypt"
+      # postconf -e smtp_tls_wrappermode="yes" # "wrappermode" protocol, which uses TCP port 465 on the SMTP server (Postfix 3.0 and later), needs minimum security_level=encrypt
+else
+      echo "configure no SASL authentication"
+fi
+
 
 for option in "${OPTIONS[@]}"; do
   setValueIfConfigured "${option}"
@@ -66,5 +90,6 @@ writeIntoFileAndSetIfConfigured "smtp_tls_CAfile" "/etc/postfix/CAcert.pem"
 # LOGGING CONFIG
 ./logging.sh
 
+echo "finished configuration, start Postfix ..."
 # START POSTFIX
 exec /usr/bin/supervisord -c /etc/supervisord.conf
