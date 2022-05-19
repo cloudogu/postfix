@@ -64,7 +64,7 @@ if [ "${POSTFIX_SASL_USER}" != "NOT_SET" ] && [ "${POSTFIX_SASL_PASSWORD}" != "N
       echo "found SASL pw and user ... configure Postfix to use SASL authentication"
 
       # SASL security in postfix
-      echo "${MAILRELAY} ${POSFIX_SASL_USER}:${POSFIX_SASL_PASSWORD}"> /etc/postfix/sasl_passwd
+      echo "${MAILRELAY} ${POSTFIX_SASL_USER}:${POSTFIX_SASL_PASSWORD}"> /etc/postfix/sasl_passwd
       postmap /etc/postfix/sasl_passwd
 
       postconf -e smtp_sasl_auth_enable="yes" # enable SASL authentication in the Postfix SMTP client. By default, the Postfix SMTP client uses no authentication.
