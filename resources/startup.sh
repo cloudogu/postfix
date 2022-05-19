@@ -33,8 +33,8 @@ function writeIntoFileAndSetIfConfigured {
 MAILRELAY=$(doguctl config relayhost)
 NAME=$(hostname)
 DOMAIN=$(doguctl config --global domain)
-POSFIX_SASL_USER=$(doguctl config username)
-POSFIX_SASL_PASSWORD=$(doguctl config password)
+POSFIX_SASL_USER=$(doguctl config sasl_username)
+POSFIX_SASL_PASSWORD=$(doguctl config sasl_password)
 NET=""
 OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
 'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'

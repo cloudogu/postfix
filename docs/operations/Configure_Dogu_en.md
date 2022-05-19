@@ -32,6 +32,12 @@ the following settings:
   etcdctl set /config/postfix/relayhost <value for the relay host>
   ```
 
+### SASL authentication
+
+* Path of the configuration key: `sasl_username` __and__ `sasl_password`.
+* If both keys are present, SASL authentication is configured at startup.
+* Optional
+
 ### SMTP TLS security level
 
 * Configuration key path: `smtp_tls_security_level`

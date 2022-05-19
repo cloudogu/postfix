@@ -32,6 +32,12 @@ Postfix-Dogu bietet die folgenden Einstellungen:
   etcdctl set /config/postfix/relayhost <Wert für den Relayhost>
   ```
 
+### SASL Authentifizierung
+
+* Pfad des Konfigurationsschlüssels: `sasl_username` __und__ `sasl_password`
+* Sind beide Schlüssel vorhanden wird beim start SASL Authentifizierung konfiguriert 
+* Optional
+
 ### SMTP TLS Sicherheitsstufe
 
 * Pfad des Konfigurationsschlüssels: `smtp_tls_security_level`

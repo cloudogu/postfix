@@ -17,6 +17,17 @@
       "Description": "The next-hop destination of non-local mail"
     },
     {
+      "Name": "sasl_username",
+      "Description": "username for sasl authentication",
+      "Optional": true
+    },
+    {
+      "Name": "sasl_password",
+      "Description": "password for sasl authentication, if the mail relay server needs an md5 encrypted password pass the encrypted password in here otherwise plain",
+      "Optional": true,
+      "Encrypted": false
+    },
+    {
       "Name": "smtp_tls_security_level",
       "Description": "The default SMTP TLS security level for the Postfix SMTP client",
       "Optional": true
