@@ -43,3 +43,30 @@ Specifically, the following steps need to be performed:
   <strg>+<d>
   ```
 * In web interface of MailHog - ```localhost:8025`` - check mail reception
+
+
+## Setting up a proxy in front of MailHog to test authentication workflows.
+MailHog does not support authentication, therefore using the tool [E-MailRelay](http://emailrelay.sourceforge.net/index.html)
+tool to set up a proxy in front of MailHog.
+
+To do this, E-MailRelay must be [downloaded](http://emailrelay.sourceforge.net/Download.html), unpacked and installed (`sudo ./configure && make && make install`).
+
+E-MailRelay can be started using
+```
+sudo emailrelay -t --as-server --forward-on-disconnect --log --verbose --log-file mailrelay.log --log-time --port 587` as proxy before MailHog.
+``` 
+The `-t` parameter starts the proxy in a terminal session. This makes it easier to restart the server. 
+The relay host must point to the address specified by `-port`.
+```
+etcdctl set /config/postfix/relayhost 192.168.56.1:587
+```
+
+### SASL authentication
+SASL authentication can be tested with the `--server-auth <server-auth-file>` parameter.
+To do this, a file must be created at the specified path in which server, username and password are stored.
+A good tutorial for this can be found [here](https://github.com/aclemons/emailrelay/blob/master/doc/reference.md#authentication).
+For SASL authentication this username and password must be stored in etcd.
+  ```
+  etcdctl set /config/postfix/sasl_username <username>
+  etcdctl set /config/postfix/sasl_password <password>
+  ```

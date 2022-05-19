@@ -59,7 +59,6 @@ postconf -e smtputf8_enable=no
 postconf -e smtpd_recipient_restrictions="permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination"
 
 
-
 # check if SASL authentication should be configured
 if [ -n "${POSFIX_SASL_USER}" ] && [ -n "${POSFIX_SASL_PASSWORD}" ]; then
       echo "found SASL pw and user ... configure Postfix to use SASL authentication"
