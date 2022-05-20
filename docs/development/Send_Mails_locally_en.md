@@ -49,24 +49,31 @@ Specifically, the following steps need to be performed:
 MailHog does not support authentication, therefore using the tool [E-MailRelay](http://emailrelay.sourceforge.net/index.html)
 tool to set up a proxy in front of MailHog.
 
-To do this, E-MailRelay must be [downloaded](http://emailrelay.sourceforge.net/Download.html), unpacked and installed (`sudo ./configure && make && make install`).
+To do this, E-MailRelay must be [downloaded](http://emailrelay.sourceforge.net/Download.html),
+unpacked and installed `sudo ./configure && sudo make && sudo make install`.
 
-E-MailRelay can be started using
+For the authentication a password file can be created, which can look like this for example
+
+secret.auth
 ```
-sudo emailrelay -t --as-server --forward-on-disconnect --log --verbose --log-file mailrelay.log --log-time --port 587` as proxy before MailHog.
-``` 
-The `-t` parameter starts the proxy in a terminal session. This makes it easier to restart the server. 
-The relay host must point to the address specified by `-port`.
+server plain adminuser adminpw
+```
+
+E-MailRelay can be created using
+```
+sudo emailrelay -t --as-server --forward-on-disconnect --log --verbose --log-file mailrelay.log --log-time --port 587 --forward-to localhost:1025 --server-auth ./secret.auth
+```
+can be started as a proxy before MailHog.
+
+The `-t` parameter starts the proxy in a terminal session. This makes it easier to restart the server.
+The relay host must point to the address specified with the `-port`.
 ```
 etcdctl set /config/postfix/relayhost 192.168.56.1:587
 ```
 
-### SASL authentication
-SASL authentication can be tested with the `--server-auth <server-auth-file>` parameter.
-To do this, a file must be created at the specified path in which server, username and password are stored.
-A good tutorial for this can be found [here](https://github.com/aclemons/emailrelay/blob/master/doc/reference.md#authentication).
-For SASL authentication this username and password must be stored in etcd.
-  ```
-  etcdctl set /config/postfix/sasl_username <username>
-  etcdctl set /config/postfix/sasl_password <password>
-  ```
+Afterwards the appropriate password for Postfix can be configured.
+SASL authentication is then used when sending mails:
+```
+etcdctl set /config/postfix/sasl_username adminuser
+etcdctl set /config/postfix/sasl_password adminpw
+```
