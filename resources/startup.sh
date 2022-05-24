@@ -70,8 +70,6 @@ if [ "${POSTFIX_SASL_USER}" != "NOT_SET" ] && [ "${POSTFIX_SASL_PASSWORD}" != "N
       postconf -e smtp_sasl_auth_enable="yes" # enable SASL authentication in the Postfix SMTP client. By default, the Postfix SMTP client uses no authentication.
       postconf -e smtp_sasl_security_options="noanonymous" # removes the prohibition on plaintext password
       postconf -e smtp_sasl_password_maps="lmdb:/etc/postfix/sasl_passwd" #hash:/ is deprecated using lmdb:/ instead
-      # postconf -e smtp_tls_security_level="encrypt"
-      # postconf -e smtp_tls_wrappermode="yes" # "wrappermode" protocol, which uses TCP port 465 on the SMTP server (Postfix 3.0 and later), needs minimum security_level=encrypt
 else
       echo "configure no SASL authentication"
 fi
