@@ -1,6 +1,6 @@
 {
   "Name": "official/postfix",
-  "Version": "3.6.4-2",
+  "Version": "3.6.4-3",
   "DisplayName": "Postfix",
   "Description": "Postfix - Mail Transfer Agent",
   "Logo": "https://cloudogu.com/images/dogus/postfix.png",
@@ -15,6 +15,17 @@
     {
       "Name": "relayhost",
       "Description": "The next-hop destination of non-local mail"
+    },
+    {
+      "Name": "sasl_username",
+      "Description": "username for sasl authentication",
+      "Optional": true
+    },
+    {
+      "Name": "sasl_password",
+      "Description": "password for sasl authentication, if the mail relay server needs an md5 encrypted password pass the encrypted password in here otherwise plain",
+      "Optional": true,
+      "Encrypted": false
     },
     {
       "Name": "smtp_tls_security_level",

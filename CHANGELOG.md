@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.6.4-3] - 2022-05-24
+### Added
+- support for SASL authentication (#13)
+
 ## [v3.6.4-2] - 2022-04-06
 ### Change
-- Upgrade zlib package to fix CVE-2018-25032; #11
+- Upgrade zlib package to fix CVE-2018-25032; (#11)
 
 ## [v3.6.4-1] - 2022-02-10
 ### Fixed

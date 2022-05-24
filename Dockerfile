@@ -1,6 +1,6 @@
 FROM registry.cloudogu.com/official/base:3.15.3-1
 LABEL NAME="official/postfix" \
-      VERSION="3.6.4-2" \
+      VERSION="3.6.4-3" \
       maintainer=hello@cloudogu.com
 
 # INSTALL POSTFIX
