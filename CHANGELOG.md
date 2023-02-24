@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fix a bug where the routing table returns multiple masks for one ip and the startup script executes
+  the `mask2cidr.sh` script with multiple parameters (#15).
+
+### Changed
+- Update postfix to 3.7.4
+- Update makefiles to 7.4.0
+- Update base image to 3.17.1-1
+- Update ces-build-lib to 1.62.0
+- Update dogu-build-lib to 2.0.0
 
 ## [v3.6.4-3] - 2022-05-24
 ### Added
