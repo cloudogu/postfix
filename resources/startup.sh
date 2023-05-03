@@ -41,21 +41,11 @@ OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
 'smtp_tls_mandatory_protocols')
 
 # GATHERING NETWORKS FROM INTERFACES FOR MYNETWORKS
-DISTINCT_DESTINATIONS=""
 for i in $(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern| awk '{print $1}' | xargs); do
-  if echo "${DISTINCT_DESTINATIONS}" | grep -q "$i"; then
-    continue
-  fi
-  DISTINCT_DESTINATIONS="${DISTINCT_DESTINATIONS} ${i}"
-done
-
-for i in ${DISTINCT_DESTINATIONS}; do
-  # This is necessary because one destination may have multiple masks in the routing table.
-  for mask in $(netstat -nr | grep "${i}" | awk '{print $3}'); do
-    CIDR=$(/mask2cidr.sh "${mask}")
+  MASK=$(netstat -nr | awk '{print $1" "$2}' | grep "${i}" | awk '{print $2}')
+  CIDR=$(/mask2cidr.sh "${MASK}")
     NET="${NET} ${i}/${CIDR}"
   done
-done
 
 echo "start Postfix configuration ..."
 
