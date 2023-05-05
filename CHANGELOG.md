@@ -12,9 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update postfix to 3.7.4
 - Update makefiles to 7.4.0
-- Update base image to 3.17.1-1
-- Update ces-build-lib to 1.62.0
-- Update dogu-build-lib to 2.0.0
+- Update base image to 3.17.3-2
+
+### Security
+- Fixed all currently known CVEs, 11 of which were critical (#17).
 
 ## [v3.6.4-3] - 2022-05-24
 ### Added
