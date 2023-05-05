@@ -1,49 +1,54 @@
 #!groovy
-@Library(['github.com/cloudogu/ces-build-lib@1.62.0', 'github.com/cloudogu/dogu-build-lib@v2.0.0'])
+@Library(['github.com/cloudogu/ces-build-lib@1.64.2', 'github.com/cloudogu/dogu-build-lib@v2.1.0'])
 import com.cloudogu.ces.cesbuildlib.*
 import com.cloudogu.ces.dogubuildlib.*
 
-node('docker') {
-    stage('Checkout') {
-        checkout scm
+timestamps {
+    properties([
+            // Keep only the last x builds to preserve space
+            buildDiscarder(logRotator(numToKeepStr: '10')),
+            // Don't run concurrent builds for a branch, because they use the same workspace directory
+            disableConcurrentBuilds(),
+            // Parameter to activate dogu upgrade test on demand
+            parameters([
+                    booleanParam(defaultValue: false, description: 'Test dogu upgrade from latest release or optionally from defined version below', name: 'TestDoguUpgrade'),
+                    string(defaultValue: '', description: 'Old Dogu version for the upgrade test (optional; e.g. 2.222.1-1)', name: 'OldDoguVersionForUpgradeTest')
+            ])
+    ])
+
+    node('docker') {
+        stage('Checkout') {
+            checkout scm
+        }
+
+        stage('Lint') {
+            lintDockerfile()
+        }
+
+        stage('Check Markdown Links') {
+            Markdown markdown = new Markdown(this)
+            markdown.check()
+        }
+
+        stage('Shellcheck') {
+            shellCheck()
+        }
+
+        stage('Trivy scan') {
+            trivy.scanDogu("/dogu", TrivyScanFormat.HTML, params.TrivyScanLevels, params.TrivyStrategy)
+            trivy.scanDogu("/dogu", TrivyScanFormat.JSON,  params.TrivyScanLevels, params.TrivyStrategy)
+            trivy.scanDogu("/dogu", TrivyScanFormat.PLAIN, params.TrivyScanLevels, params.TrivyStrategy)
+        }
     }
+    node('vagrant') {
+        Git git = new Git(this, "cesmarvin")
+        git.committerName = 'cesmarvin'
+        git.committerEmail = 'cesmarvin@cloudogu.com'
+        GitFlow gitflow = new GitFlow(this, git)
+        GitHub github = new GitHub(this, git)
+        Changelog changelog = new Changelog(this)
 
-    stage('Lint') {
-        lintDockerfile()
-    }
-
-    stage('Check Markdown Links') {
-        Markdown markdown = new Markdown(this)
-        markdown.check()
-    }
-
-    stage('Shellcheck') {
-        shellCheck()
-    }
-}
-node('vagrant') {
-    Git git = new Git(this, "cesmarvin")
-    git.committerName = 'cesmarvin'
-    git.committerEmail = 'cesmarvin@cloudogu.com'
-    GitFlow gitflow = new GitFlow(this, git)
-    GitHub github = new GitHub(this, git)
-    Changelog changelog = new Changelog(this)
-
-    String doguName = "postfix"
-
-    timestamps {
-        properties([
-                // Keep only the last x builds to preserve space
-                buildDiscarder(logRotator(numToKeepStr: '10')),
-                // Don't run concurrent builds for a branch, because they use the same workspace directory
-                disableConcurrentBuilds(),
-                // Parameter to activate dogu upgrade test on demand
-                parameters([
-                        booleanParam(defaultValue: false, description: 'Test dogu upgrade from latest release or optionally from defined version below', name: 'TestDoguUpgrade'),
-                        string(defaultValue: '', description: 'Old Dogu version for the upgrade test (optional; e.g. 2.222.1-1)', name: 'OldDoguVersionForUpgradeTest')
-                ])
-        ])
-
+        String doguName = "postfix"
 
         EcoSystem ecoSystem = new EcoSystem(this, "gcloud-ces-operations-internal-packer", "jenkins-gcloud-ces-operations-internal")
         Vagrant vagrant = new Vagrant(this, "gcloud-ces-operations-internal-packer", "jenkins-gcloud-ces-operations-internal")
