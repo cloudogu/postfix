@@ -51,13 +51,6 @@ timestamps {
 
         try {
 
-            stage('Trivy scan') {
-                Trivy trivy = new Trivy(this, ecoSystem)
-                trivy.scanDogu("/dogu", TrivyScanFormat.HTML, params.TrivyScanLevels, params.TrivyStrategy)
-                trivy.scanDogu("/dogu", TrivyScanFormat.JSON,  params.TrivyScanLevels, params.TrivyStrategy)
-                trivy.scanDogu("/dogu", TrivyScanFormat.PLAIN, params.TrivyScanLevels, params.TrivyStrategy)
-            }
-
             stage('Provision') {
                 ecoSystem.provision("/dogu")
             }
@@ -73,6 +66,13 @@ timestamps {
 
             stage('Verify') {
                 ecoSystem.verify("/dogu")
+            }
+
+            stage('Trivy scan') {
+                Trivy trivy = new Trivy(this, ecoSystem)
+                trivy.scanDogu("/dogu", TrivyScanFormat.HTML, params.TrivyScanLevels, params.TrivyStrategy)
+                trivy.scanDogu("/dogu", TrivyScanFormat.JSON,  params.TrivyScanLevels, params.TrivyStrategy)
+                trivy.scanDogu("/dogu", TrivyScanFormat.PLAIN, params.TrivyScanLevels, params.TrivyStrategy)
             }
 
             if (params.TestDoguUpgrade != null && params.TestDoguUpgrade){
