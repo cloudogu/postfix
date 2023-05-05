@@ -35,12 +35,6 @@ timestamps {
         stage('Shellcheck') {
             shellCheck()
         }
-
-        stage('Trivy scan') {
-            trivy.scanDogu("/dogu", TrivyScanFormat.HTML, params.TrivyScanLevels, params.TrivyStrategy)
-            trivy.scanDogu("/dogu", TrivyScanFormat.JSON,  params.TrivyScanLevels, params.TrivyStrategy)
-            trivy.scanDogu("/dogu", TrivyScanFormat.PLAIN, params.TrivyScanLevels, params.TrivyStrategy)
-        }
     }
     node('vagrant') {
         Git git = new Git(this, "cesmarvin")
@@ -56,6 +50,13 @@ timestamps {
         Vagrant vagrant = new Vagrant(this, "gcloud-ces-operations-internal-packer", "jenkins-gcloud-ces-operations-internal")
 
         try {
+
+            stage('Trivy scan') {
+                Trivy trivy = new Trivy(this, ecoSystem)
+                trivy.scanDogu("/dogu", TrivyScanFormat.HTML, params.TrivyScanLevels, params.TrivyStrategy)
+                trivy.scanDogu("/dogu", TrivyScanFormat.JSON,  params.TrivyScanLevels, params.TrivyStrategy)
+                trivy.scanDogu("/dogu", TrivyScanFormat.PLAIN, params.TrivyScanLevels, params.TrivyStrategy)
+            }
 
             stage('Provision') {
                 ecoSystem.provision("/dogu")
