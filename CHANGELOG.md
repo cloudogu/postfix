@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.6.4-4] - 2023-05-08
+### Fixed
+- Fix a bug where the routing table returns multiple masks for one ip and the startup script executes
+  the `mask2cidr.sh` script with multiple parameters (#15).
+
+### Changed
+- Update postfix to 3.7.4
+- Update makefiles to 7.4.0
+- Update base image to 3.17.3-2
+
+### Security
+- Fixed all currently known CVEs, 11 of which were critical (#17).
+
 ## [v3.6.4-3] - 2022-05-24
 ### Added
 - support for SASL authentication (#13)

@@ -5,7 +5,7 @@ set -o pipefail
 
 # 1: value
 function setValueIfConfigured {
-  if doguctl config "${1}" > /dev/null; then
+  if doguctl config "${1}" >/dev/null; then
     postconf -e "${1}"="$(doguctl config "${1}")"
   fi
 }
@@ -17,14 +17,14 @@ function setValueIfConfigured {
 function writeIntoFileAndSetIfConfigured {
   OPTION_NAME="${1}"
   FILE_NAME="${2}"
-  if [[ "$#" -gt 2 ]];then
+  if [[ "$#" -gt 2 ]]; then
     PARAM="${3}"
   else
     PARAM=""
   fi
-  if doguctl config "${OPTION_NAME}" > /dev/null; then
+  if doguctl config "${OPTION_NAME}" >/dev/null; then
     # PARAM should not be in double quotes because it can be empty
-    doguctl config "${PARAM}" "${OPTION_NAME}" > "${FILE_NAME}"
+    doguctl config "${PARAM}" "${OPTION_NAME}" >"${FILE_NAME}"
     chmod 600 "${FILE_NAME}"
     postconf -e "${OPTION_NAME}"="${FILE_NAME}"
   fi
@@ -37,12 +37,12 @@ POSTFIX_SASL_USER=$(doguctl config --default "NOT_SET" sasl_username)
 POSTFIX_SASL_PASSWORD=$(doguctl config --default "NOT_SET" sasl_password)
 NET=""
 OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
-'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'
-'smtp_tls_mandatory_protocols')
+  'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'
+  'smtp_tls_mandatory_protocols')
 
 # GATHERING NETWORKS FROM INTERFACES FOR MYNETWORKS
-for i in $(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern| awk '{print $1}' | xargs); do
-  MASK=$(netstat -nr | grep "${i}" | awk '{print $3}')
+for i in $(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern | awk '{print $1}' | xargs); do
+  MASK=$(netstat -nr | awk '{print $1" "$3}' | grep "${i}" | awk '{print $2}')
   CIDR=$(/mask2cidr.sh "${MASK}")
   NET="${NET} ${i}/${CIDR}"
 done
@@ -58,22 +58,20 @@ postconf -e mynetworks="127.0.0.1 ${NET}"
 postconf -e smtputf8_enable=no
 postconf -e smtpd_recipient_restrictions="permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination"
 
-
 # check if SASL authentication should be configured
 if [ "${POSTFIX_SASL_USER}" != "NOT_SET" ] && [ "${POSTFIX_SASL_PASSWORD}" != "NOT_SET" ]; then
-      echo "found SASL pw and user ... configure Postfix to use SASL authentication"
+  echo "found SASL pw and user ... configure Postfix to use SASL authentication"
 
-      # SASL security in postfix
-      echo "${MAILRELAY} ${POSTFIX_SASL_USER}:${POSTFIX_SASL_PASSWORD}"> /etc/postfix/sasl_passwd
-      postmap /etc/postfix/sasl_passwd
+  # SASL security in postfix
+  echo "${MAILRELAY} ${POSTFIX_SASL_USER}:${POSTFIX_SASL_PASSWORD}" >/etc/postfix/sasl_passwd
+  postmap /etc/postfix/sasl_passwd
 
-      postconf -e smtp_sasl_auth_enable="yes" # enable SASL authentication in the Postfix SMTP client. By default, the Postfix SMTP client uses no authentication.
-      postconf -e smtp_sasl_security_options="noanonymous" # removes the prohibition on plaintext password
-      postconf -e smtp_sasl_password_maps="lmdb:/etc/postfix/sasl_passwd" #hash:/ is deprecated using lmdb:/ instead
+  postconf -e smtp_sasl_auth_enable="yes"                             # enable SASL authentication in the Postfix SMTP client. By default, the Postfix SMTP client uses no authentication.
+  postconf -e smtp_sasl_security_options="noanonymous"                # removes the prohibition on plaintext password
+  postconf -e smtp_sasl_password_maps="lmdb:/etc/postfix/sasl_passwd" #hash:/ is deprecated using lmdb:/ instead
 else
-      echo "configure no SASL authentication"
+  echo "configure no SASL authentication"
 fi
-
 
 for option in "${OPTIONS[@]}"; do
   setValueIfConfigured "${option}"
