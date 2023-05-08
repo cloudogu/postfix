@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v3.6.4-4] - 2023-05-08
 ### Fixed
 - Fix a bug where the routing table returns multiple masks for one ip and the startup script executes
   the `mask2cidr.sh` script with multiple parameters (#15).
