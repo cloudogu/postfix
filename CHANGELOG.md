@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.6.4-5] - 2023-06-27
+### Added
+- [#20] Configuration options for resource requirements
+- [#20] Defaults for CPU and memory requests
+
 ## [v3.6.4-4] - 2023-05-08
 ### Fixed
 - Fix a bug where the routing table returns multiple masks for one ip and the startup script executes
