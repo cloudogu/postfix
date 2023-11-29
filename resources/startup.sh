@@ -59,7 +59,7 @@ IFS=$NEW_LINE_IFS
 for i in ${DESTINATION_AND_MASKS}; do
   # Restore default IFS to split the destination and mask ip address.
   IFS=$OLD_IFS
-  DESTINATION_MASK=("$i")
+  DESTINATION_MASK=($i)
   CIDR=$(/mask2cidr.sh "${DESTINATION_MASK[1]}")
   NET="${NET} ${DESTINATION_MASK[0]}/${CIDR}"
   IFS=$NEW_LINE_IFS
