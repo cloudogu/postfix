@@ -55,14 +55,11 @@ NEW_LINE_IFS=$'\n'
 OLD_IFS=$IFS
 # Set IFS to new line to iterate over the lines from DESTINATION_AND_MASKS
 IFS=$NEW_LINE_IFS
-
 for i in ${DESTINATION_AND_MASKS}; do
   # Restore default IFS to split the destination and mask ip address.
-  IFS=$OLD_IFS
-  DESTINATION_MASK=($i)
+  IFS=" " read -r -a DESTINATION_MASK <<< "$i"
   CIDR=$(/mask2cidr.sh "${DESTINATION_MASK[1]}")
   NET="${NET} ${DESTINATION_MASK[0]}/${CIDR}"
-  IFS=$NEW_LINE_IFS
 done
 IFS=$OLD_IFS
 
