@@ -51,10 +51,9 @@ OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
 #    10.42.0.0 255.255.0.0
 DESTINATION_AND_MASKS=$(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern | awk '{print $1" "$3}')
 
-NEW_LINE_IFS=$'\n'
 OLD_IFS=$IFS
 # Set IFS to new line to iterate over the lines from DESTINATION_AND_MASKS
-IFS=$NEW_LINE_IFS
+IFS=$'\n'
 for i in ${DESTINATION_AND_MASKS}; do
   # Restore default IFS to split the destination and mask ip address.
   IFS=" " read -r -a DESTINATION_MASK <<< "$i"
