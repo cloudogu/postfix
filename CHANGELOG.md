@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.6.4-6] - 2023-12-04
+### Fixed
+- [#22] Fixed a bug where multiple masks for a destination ip would result in multi line input for cidr generation.
+
 ## [v3.6.4-5] - 2023-06-27
 ### Added
 - [#20] Configuration options for resource requirements
