@@ -94,12 +94,14 @@ the following settings:
 * Disables support for malformed line endings in SMTP.
   This fixes CVE-2023-51764 but could break (rare) clients that mis-implement SMTP.
 * Optional
+* Valid values: `yes, no`
 * Default value: `yes`
 
 ### Client exclusions for bare newlines
 
 * Configuration key path: `smtpd_forbid_bare_newline_exclusions`
 * List of clients for which bare newlines should still be allowed.
+  See https://www.postfix.org/postconf.5.html#smtpd_forbid_bare_newline_exclusions
 * Optional
 * Default value: `$mynetworks`
 
