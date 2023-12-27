@@ -38,7 +38,8 @@ POSTFIX_SASL_PASSWORD=$(doguctl config --default "NOT_SET" sasl_password)
 NET=""
 OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
   'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'
-  'smtp_tls_mandatory_protocols')
+  'smtp_tls_mandatory_protocols'
+  'smtpd_forbid_bare_newline' 'smtpd_forbid_bare_newline_exclusions')
 
 # GATHERING NETWORKS FROM INTERFACES FOR MYNETWORKS
 

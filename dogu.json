@@ -1,6 +1,6 @@
 {
   "Name": "official/postfix",
-  "Version": "3.6.4-6",
+  "Version": "3.8.4-1",
   "DisplayName": "Postfix",
   "Description": "Postfix - Mail Transfer Agent",
   "Logo": "https://cloudogu.com/images/dogus/postfix.png",
@@ -68,6 +68,25 @@
       "Name": "smtp_tls_mandatory_protocols",
       "Description": "List of SSL/TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption",
       "Optional": true
+    },
+    {
+      "Name": "smtpd_forbid_bare_newline",
+      "Description": "Disables support for malformed line endings in SMTP. This fixes CVE-2023-51764 but could break (rare) clients that mis-implement SMTP.",
+      "Optional": true,
+      "Default": "yes",
+      "Validation": {
+        "Type": "ONE_OF",
+        "Values": [
+          "yes",
+          "no"
+        ]
+      }
+    },
+    {
+      "Name": "smtpd_forbid_bare_newline_exclusions",
+      "Description": "List of clients for which bare newlines should still be allowed. See https://www.postfix.org/postconf.5.html#smtpd_forbid_bare_newline_exclusions",
+      "Optional": true,
+      "Default": "$mynetworks"
     },
     {
       "Name": "logging/root",
