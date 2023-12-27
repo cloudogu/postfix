@@ -70,6 +70,25 @@
       "Optional": true
     },
     {
+      "Name": "smtpd_forbid_bare_newline",
+      "Description": "Disables support for malformed line endings in SMTP. This fixes CVE-2023-51764 but could break (rare) clients that mis-implement SMTP.",
+      "Optional": true,
+      "Default": "yes",
+      "Validation": {
+        "Type": "ONE_OF",
+        "Values": [
+          "yes",
+          "no"
+        ]
+      }
+    },
+    {
+      "Name": "smtpd_forbid_bare_newline_exclusions",
+      "Description": "List of clients for which bare newlines should still be allowed. See https://www.postfix.org/postconf.5.html#smtpd_forbid_bare_newline_exclusions",
+      "Optional": true,
+      "Default": "$mynetworks"
+    },
+    {
       "Name": "logging/root",
       "Description": "Set the root log level to one of ERROR, WARN, INFO, DEBUG.",
       "Optional": true,

@@ -1,4 +1,4 @@
-FROM registry.cloudogu.com/official/base:3.17.3-2
+FROM registry.cloudogu.com/official/base:3.18.3-1
 LABEL NAME="official/postfix" \
       VERSION="3.6.4-6" \
       maintainer=hello@cloudogu.com
