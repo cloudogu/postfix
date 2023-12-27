@@ -91,6 +91,21 @@ Postfix-Dogu bietet die folgenden Einstellungen:
 * Liste der SSL/TLS-Protokolle, die der Postfix-SMTP-Client mit zwingender TLS-Verschlüsselung verwenden wird
 * Optional
 
+### Missgebildete Zeilenenden
+
+* Pfad des Konfigurationsschlüssels: `smtpd_forbid_bare_newline`
+* Deaktiviert die Unterstützung für missgebildete Zeilenenden in SMTP.
+  Dies behebt [CVE-2023-51764](https://nvd.nist.gov/vuln/detail/CVE-2023-51764), könnte aber (seltene) Clients stören, die SMTP falsch implementieren.
+* Optional
+* Default-Wert: `yes`
+
+### Client-Ausnahmen für missgebildete Zeilenenden
+
+* Pfad des Konfigurationsschlüssels: `smtpd_forbid_bare_newline_exclusions`
+* Liste der Clients, für die bloße Zeilenumbrüche weiterhin zulässig sein sollen.
+* Optional
+* Default-Wert: `$mynetworks`
+
 ### Log Level
 
 * Pfad des Konfigurationsschlüssels: `logging/root`

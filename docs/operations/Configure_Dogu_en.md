@@ -88,6 +88,21 @@ the following settings:
 * List of SSL/TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption
 * Optional
 
+### Bare newlines
+
+* Configuration key path: `smtpd_forbid_bare_newline`
+* Disables support for malformed line endings in SMTP.
+  This fixes CVE-2023-51764 but could break (rare) clients that mis-implement SMTP.
+* Optional
+* Default value: `yes`
+
+### Client exclusions for bare newlines
+
+* Configuration key path: `smtpd_forbid_bare_newline_exclusions`
+* List of clients for which bare newlines should still be allowed.
+* Optional
+* Default value: `$mynetworks`
+
 ### Log Level
 
 * Configuration key path: `logging/root`

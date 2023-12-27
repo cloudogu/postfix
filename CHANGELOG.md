@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Security
+- [#24] Prevent [SMTP smuggling](https://www.postfix.org/smtp-smuggling.html) due to [CVE-2023-51764](https://nvd.nist.gov/vuln/detail/CVE-2023-51764)
+### Added
+- [#24] Configuration to prevent the aforementioned SMTP smuggling.  
+  **BREAKING CHANGE:** This might break exceedingly rare clients that mis-implement SMTP.
+  Configuration options to allow those clients specifically
+  [can be found here](docs/operations/Configure_Dogu_en.md#client-exclusions-for-bare-newlines).
+### Changed
+- Upgraded postfix from `3.6.4` to `3.8.4`
+- Upgraded alpine base image from `3.17.3-2` to `3.18.3-1`
 
 ## [v3.6.4-6] - 2023-12-04
 ### Fixed
