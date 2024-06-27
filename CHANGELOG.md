@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.9.0-1] - 2024-06-27
+### Changed
+- [#26] Upgraded alpine base image to `3.20.1-2`
+
 ## [v3.8.4-1] - 2023-12-27
 ### Security
 - [#24] Prevent [SMTP smuggling](https://www.postfix.org/smtp-smuggling.html) due to [CVE-2023-51764](https://nvd.nist.gov/vuln/detail/CVE-2023-51764)
