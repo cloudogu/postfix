@@ -9,3 +9,5 @@
 integrationTests/node_modules
 
 .bin
+.env
+target
