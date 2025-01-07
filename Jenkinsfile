@@ -33,7 +33,7 @@ timestamps {
         }
 
         stage('Shellcheck') {
-            shellCheck("./resources")
+            shellCheck("./resources/logging.sh ./resources/startup.sh ./resources/mask2cidr.sh")
         }
     }
     node('vagrant') {
