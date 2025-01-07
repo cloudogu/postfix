@@ -33,7 +33,7 @@ timestamps {
         }
 
         stage('Shellcheck') {
-            shellCheck()
+            shellCheck("./resources")
         }
     }
     node('vagrant') {
