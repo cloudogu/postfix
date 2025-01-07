@@ -1,5 +1,5 @@
 #!groovy
-@Library(['github.com/cloudogu/ces-build-lib@1.67.0', 'github.com/cloudogu/dogu-build-lib@v2.3.0'])
+@Library(['github.com/cloudogu/ces-build-lib@3.1.0', 'github.com/cloudogu/dogu-build-lib@v2.6.0'])
 import com.cloudogu.ces.cesbuildlib.*
 import com.cloudogu.ces.dogubuildlib.*
 
@@ -33,7 +33,7 @@ timestamps {
         }
 
         stage('Shellcheck') {
-            shellCheck()
+            shellCheck("./resources/logging.sh ./resources/startup.sh ./resources/mask2cidr.sh")
         }
     }
     node('vagrant') {
