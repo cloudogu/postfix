@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - [#32] Update Makefiles to 9.5.0
+- [#36] exit with error if `logging/root` is invalid
+  - this change is necessary for compatibility with CES Multinode
+
 ## [v3.9.0-3] - 2024-09-18
 ### Changed
 - Relicense to AGPL-3.0-only
