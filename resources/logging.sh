@@ -3,6 +3,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+SCRIPT_LOG_PREFIX="Log level mapping:"
+
 function exitOnInvalidDoguLogLevel() {
   echo "${SCRIPT_LOG_PREFIX} Validate root log level"
 
@@ -35,8 +37,6 @@ RSYSLOG_LOGGING="/etc/rsyslog.conf"
 # config file for supervisor which contains a loglevel configuration
 SUPERVISOR_CONF_TEMPLATE="/etc/supervisord.conf.tpl"
 SUPERVISOR_CONF="/etc/supervisord.conf"
-
-SCRIPT_LOG_PREFIX="Log level mapping:"
 
 echo "Rendering logging configuration..."
 doguctl template ${RSYSLOG_LOGGING_TEMPLATE} ${RSYSLOG_LOGGING}
