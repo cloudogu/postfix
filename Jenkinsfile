@@ -1,7 +1,7 @@
 #!groovy
-@Library(['github.com/cloudogu/ces-build-lib@3.1.0', 'github.com/cloudogu/dogu-build-lib@v2.6.0'])
-import com.cloudogu.ces.cesbuildlib.*
+@Library(['github.com/cloudogu/dogu-build-lib@v3.0.0', 'github.com/cloudogu/ces-build-lib@4.0.1']) _
 import com.cloudogu.ces.dogubuildlib.*
+import com.cloudogu.ces.cesbuildlib.*
 
 timestamps {
     properties([
@@ -11,10 +11,10 @@ timestamps {
             disableConcurrentBuilds(),
             // Parameter to activate dogu upgrade test on demand
             parameters([
-                    booleanParam(defaultValue: false, description: 'Test dogu upgrade from latest release or optionally from defined version below', name: 'TestDoguUpgrade'),
-                    string(defaultValue: '', description: 'Old Dogu version for the upgrade test (optional; e.g. 2.222.1-1)', name: 'OldDoguVersionForUpgradeTest'),
-                    choice(name: 'TrivyScanLevels', choices: [TrivyScanLevel.CRITICAL, TrivyScanLevel.HIGH, TrivyScanLevel.MEDIUM, TrivyScanLevel.ALL], description: 'The levels to scan with trivy'),
-                    choice(name: 'TrivyStrategy', choices: [TrivyScanStrategy.UNSTABLE, TrivyScanStrategy.FAIL, TrivyScanStrategy.IGNORE], description: 'Define whether the build should be unstable, fail or whether the error should be ignored if any vulnerability was found.')
+                       booleanParam(defaultValue: false, description: 'Test dogu upgrade from latest release or optionally from defined version below', name: 'TestDoguUpgrade'),
+                        string(defaultValue: '', description: 'Old Dogu version for the upgrade test (optional; e.g. 3.23.0-1)', name: 'OldDoguVersionForUpgradeTest'),
+                        choice(name: 'TrivySeverityLevels', choices: [TrivySeverityLevel.CRITICAL, TrivySeverityLevel.HIGH_AND_ABOVE, TrivySeverityLevel.MEDIUM_AND_ABOVE, TrivySeverityLevel.ALL], description: 'The levels to scan with trivy', defaultValue: TrivySeverityLevel.CRITICAL),
+                        choice(name: 'TrivyStrategy', choices: [TrivyScanStrategy.UNSTABLE, TrivyScanStrategy.FAIL, TrivyScanStrategy.IGNORE], description: 'Define whether the build should be unstable, fail or whether the error should be ignored if any vulnerability was found.', defaultValue: TrivyScanStrategy.UNSTABLE),
             ])
     ])
 
@@ -36,6 +36,7 @@ timestamps {
             shellCheck("./resources/logging.sh ./resources/startup.sh ./resources/mask2cidr.sh")
         }
     }
+
     node('vagrant') {
         Git git = new Git(this, "cesmarvin")
         git.committerName = 'cesmarvin'
