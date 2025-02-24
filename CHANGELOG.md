@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update Postfix to v3.9.1
 - Updated Base Image to v3.21.0-1
+- Upgrade dogu-build-lib to v3.0.0 
+- Upgrade ces-build-lib to v4.0.1
+
 ### Security
 - Fixed [CVE-2024-45337](https://avd.aquasec.com/nvd/2024/cve-2024-45337/)
 
