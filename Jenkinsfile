@@ -73,7 +73,6 @@ timestamps {
                 ecoSystem.build("/dogu")
             }
 
-
             stage('Trivy scan') {
                 ecoSystem.copyDoguImageToJenkinsWorker("/dogu")
                 Trivy trivy = new Trivy(this)
@@ -112,7 +111,7 @@ timestamps {
                 }
 
                 stage('Add Github-Release'){
-                    github.createReleaseWithChangelog(releaseVersion, changelog, productionReleaseBranch)
+                    github.createReleaseWithChangelog(releaseVersion, changelog)
                 }
             } else if (gitflow.isPreReleaseBranch()) {
                 // push to registry in prerelease_namespace
