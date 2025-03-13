@@ -5,12 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v3.9.3-1] - 2025-03-13
 ### Changed
 - Update Postfix to v3.9.3
 - Updated Base Image to v3.21.0-1
 - Upgrade dogu-build-lib to v3.1.0 
 - Upgrade ces-build-lib to v4.1.0
-
+- added pre-release steps in pipeline
 ### Security
 - Fixed [CVE-2024-45337](https://avd.aquasec.com/nvd/2024/cve-2024-45337/)
 
