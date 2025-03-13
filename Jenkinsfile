@@ -1,5 +1,5 @@
 #!groovy
-@Library(['github.com/cloudogu/dogu-build-lib@v3.0.0', 'github.com/cloudogu/ces-build-lib@4.0.1']) _
+@Library(['github.com/cloudogu/dogu-build-lib@v3.1.0', 'github.com/cloudogu/ces-build-lib@4.1.0']) _
 import com.cloudogu.ces.dogubuildlib.*
 import com.cloudogu.ces.cesbuildlib.*
 
@@ -53,6 +53,10 @@ timestamps {
         try {
 
             stage('Provision') {
+                // change namespace to prerelease_namespace if in develop-branch
+                if (gitflow.isPreReleaseBranch()) {
+                    sh "make prerelease_namespace"
+                }
                 ecoSystem.provision("/dogu")
             }
 
@@ -103,8 +107,13 @@ timestamps {
                     ecoSystem.push("/dogu")
                 }
 
-                stage('Add Github-Release') {
-                    github.createReleaseWithChangelog(releaseVersion, changelog)
+                stage('Add Github-Release'){
+                    github.createReleaseWithChangelog(releaseVersion, changelog, productionReleaseBranch)
+                }
+            } else if (gitflow.isPreReleaseBranch()) {
+                // push to registry in prerelease_namespace
+                stage('Push Prerelease Dogu to registry') {
+                    ecoSystem.pushPreRelease("/dogu")
                 }
             }
 
