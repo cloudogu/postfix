@@ -66,6 +66,10 @@ timestamps {
             }
 
             stage('Build') {
+                // purge postfix from official namespace to prevent conflicts while building prerelease_official/postfix
+                if (gitflow.isPreReleaseBranch()) {
+                    ecoSystem.purgeDogu("postfix")
+                }
                 ecoSystem.build("/dogu")
             }
 
