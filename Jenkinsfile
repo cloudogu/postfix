@@ -66,9 +66,9 @@ timestamps {
             }
 
             stage('Build') {
-                // purge postfix from official namespace to prevent conflicts while building prerelease_official/postfix
+                // purge postfix from official namespace to prevent conflicts while building prerelease_official/postfix, keep config to avoid no etcd endpoints error
                 if (gitflow.isPreReleaseBranch()) {
-                    ecoSystem.purgeDogu("postfix")
+                    ecoSystem.purgeDogu("postfix", "--keep-config")
                 }
                 ecoSystem.build("/dogu")
             }
