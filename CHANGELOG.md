@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- [#40] Set sensible resource requests and limits
+
 ## [v3.9.3-3] - 2025-04-25
 ### Fixed
 - [#42] create aliases file if not exists to prevent error
