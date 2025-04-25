@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.9.3-3] - 2025-04-25
+### Fixed
+- [#42] create aliases file if not exists to prevent error
+
 ## [v3.9.3-2] - 2025-03-13
 ### Changed
 - Update Postfix to v3.9.3

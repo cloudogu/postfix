@@ -101,6 +101,13 @@ writeIntoFileAndSetIfConfigured "smtp_tls_CAfile" "/etc/postfix/CAcert.pem"
 # LOGGING CONFIG
 ./logging.sh
 
+# create aliases
+if [ ! -f /etc/postfix/aliases.lmdb ]; then
+    echo "aliases file not found!"
+    echo "create new aliases.."
+    newaliases
+fi
+
 echo "finished configuration, start Postfix ..."
 # START POSTFIX
 exec /usr/bin/supervisord -c /etc/supervisord.conf
