@@ -6,8 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [v3.9.3-4] - 2025-04-25
+## [v3.10.2-1] - 2025-06-05
+### Changed
+- [#44] Update Postfix to v3.10.2
+- [#44] Update makefiles to 10.1.0
+- [#44] Updated Base Image to v3.22.0-1
 
+## [v3.9.3-4] - 2025-04-25
 ### Changed
 - [#40] Set sensible resource requests and limits
 
