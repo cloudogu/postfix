@@ -6,8 +6,9 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 ### Changed
-- [#44] Update Postfix to v3.10.2
-- [#44] Update makefiles to 10.1.0
+- [#44] Update Postfix auf v3.10.2
+- [#44] Update makefiles auf v10.1.0
+- [#44] Updated Base Image auf v3.22.0-1
 
 ## [v3.9.3-4] - 2025-04-25
 ### Changed
