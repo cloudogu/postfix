@@ -6,6 +6,10 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 ### Changed
+- Wir haben nur technische Änderungen vorgenommen. Näheres finden Sie in den Changelogs.
+
+## [v3.10.2-1] - 2025-06-05
+### Changed
 - [#44] Update Postfix auf v3.10.2
 - [#44] Update makefiles auf v10.1.0
 - [#44] Updated Base Image auf v3.22.0-1
