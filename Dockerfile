@@ -3,7 +3,7 @@ LABEL NAME="official/postfix" \
       VERSION="3.10.2-2" \
       maintainer=hello@cloudogu.com
 
-ENV POSTFIX_ALPINE_VERSION=3.10.2-r0
+ENV POSTFIX_ALPINE_VERSION=3.10.3-r0
 
 # INSTALL POSTFIX
 RUN set -o errexit \
