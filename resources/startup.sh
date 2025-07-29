@@ -42,8 +42,10 @@ OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
   'smtpd_forbid_bare_newline' 'smtpd_forbid_bare_newline_exclusions')
 
 # GATHERING NETWORKS FROM INTERFACES FOR MYNETWORKS
-# Not necessary in CES Multinode because of NetworkPolicys
-if [[ "$(doguctl multinode)" = "false" ]]; then
+if [[ "$(doguctl multinode)" = "true" ]]; then
+  # Not necessary in CES Multinode because of NetworkPolicys
+  NET="0.0.0.0/0"
+else
   # This will output something like:
   #    172.18.0.0 255.255.0.0
   DESTINATION_AND_MASKS=$(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern | awk '{print $1" "$3}')
