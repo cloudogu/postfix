@@ -42,27 +42,23 @@ OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
   'smtpd_forbid_bare_newline' 'smtpd_forbid_bare_newline_exclusions')
 
 # GATHERING NETWORKS FROM INTERFACES FOR MYNETWORKS
+# Not necessary in CES Multinode because of NetworkPolicys
+if [[ "$(doguctl multinode)" = "false" ]]; then
+  # This will output something like:
+  #    172.18.0.0 255.255.0.0
+  DESTINATION_AND_MASKS=$(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern | awk '{print $1" "$3}')
 
-# This will output something like:
-# - In single node environments
-#    172.18.0.0 255.255.0.0
-#
-# - In multinode environments
-#    10.42.0.0 255.255.255.0
-#    10.42.0.0 255.255.0.0
-DESTINATION_AND_MASKS=$(netstat -nr | grep -v ^0 | grep -v Dest | grep -v Kern | awk '{print $1" "$3}')
-
-OLD_IFS=$IFS
-# Set IFS to new line to iterate over the lines from DESTINATION_AND_MASKS
-IFS=$'\n'
-for i in ${DESTINATION_AND_MASKS}; do
-  # Restore default IFS to split the destination and mask ip address.
-  IFS=" " read -r -a DESTINATION_MASK <<< "$i"
-  CIDR=$(/mask2cidr.sh "${DESTINATION_MASK[1]}")
-  NET="${NET} ${DESTINATION_MASK[0]}/${CIDR}"
-done
-IFS=$OLD_IFS
-
+  OLD_IFS=$IFS
+  # Set IFS to new line to iterate over the lines from DESTINATION_AND_MASKS
+  IFS=$'\n'
+  for i in ${DESTINATION_AND_MASKS}; do
+    # Restore default IFS to split the destination and mask ip address.
+    IFS=" " read -r -a DESTINATION_MASK <<< "$i"
+    CIDR=$(/mask2cidr.sh "${DESTINATION_MASK[1]}")
+    NET="${NET} ${DESTINATION_MASK[0]}/${CIDR}"
+  done
+  IFS=$OLD_IFS
+fi
 echo "start Postfix configuration ..."
 
 # POSTFIX CONFIG
