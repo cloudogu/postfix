@@ -6,6 +6,12 @@ Technical details on a release can be found in the corresponding [Changelog](htt
 
 ## [Unreleased]
 
+## [v3.10.3-1] - 2025-08-05
+### Changed
+- [#50] Update Postfix to 3.10.3
+### Security
+- Patched [CVE-2025-6965](https://avd.aquasec.com/nvd/2025/cve-2025-6965/)
+
 ## [v3.10.2-2] - 2025-06-11
 ### Changed
 - We have only made technical changes. You can find more details in the changelogs.
