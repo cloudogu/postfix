@@ -6,6 +6,10 @@ Technical details on a release can be found in the corresponding [Changelog](htt
 
 ## [Unreleased]
 
+## [v3.10.3-2] - 2025-08-06
+### Changed
+- [#48] Apply network restrictions only in Classic CES environments
+
 ## [v3.10.3-1] - 2025-08-05
 ### Changed
 - [#50] Update Postfix to 3.10.3
