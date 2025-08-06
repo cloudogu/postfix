@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.10.3-2] - 2025-08-06
+### Changed
+- [#48] Apply network restrictions only in Classic CES environments
+
+
 ## [v3.10.3-1] - 2025-08-05
 ### Changed
 - [#50] Update Postfix to 3.10.3
