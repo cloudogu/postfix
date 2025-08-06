@@ -6,6 +6,10 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 
+## [v3.10.3-2] - 2025-08-06
+### Changed
+- [#48] Netzwerkbeschränkungen nur in klassischen CES-Umgebungen anwenden
+
 ## [v3.10.3-1] - 2025-08-05
 ### Changed
 - [#50] Update Postfix auf 3.10.3
