@@ -6,6 +6,10 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 
+## [v3.10.5-1] - 2025-11-13
+### Changed
+- [#55] Update Postfix auf 3.10.5
+
 ## [v3.10.4-1] - 2025-09-03
 ### Changed
 - [#52] Update Postfix auf 3.10.4

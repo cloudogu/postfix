@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.10.5-1] - 2025-11-13
+### Changed
+- [#55] Update Postfix to 3.10.5
+
 ## [v3.10.4-1] - 2025-09-03
 ### Changed
 - [#52] Update Postfix to 3.10.4
