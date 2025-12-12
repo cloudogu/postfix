@@ -6,6 +6,10 @@ Technical details on a release can be found in the corresponding [Changelog](htt
 
 ## [Unreleased]
 
+## [v3.10.7-1] - 2025-12-12
+### Changed
+- [#57] Update Postfix auf 3.10.7
+
 ## [v3.10.5-1] - 2025-11-13
 ### Changed
 - [#55] Update Postfix to 3.10.5
