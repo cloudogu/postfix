@@ -6,6 +6,11 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 
+## [v3.10.7-2] - 2026-01-29
+
+### Security
+- [#59] Sicherheitslücke geschlossen [cve-2025-15467](https://avd.aquasec.com/nvd/2025/cve-2025-15467/)
+
 ## [v3.10.7-1] - 2025-12-12
 ### Changed
 - [#57] Update Postfix auf 3.10.7
