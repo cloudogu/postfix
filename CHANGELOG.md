@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+- [#59] CVE fixed: [cve-2025-15467](https://avd.aquasec.com/nvd/2025/cve-2025-15467/)
+
 ## [v3.10.7-1] - 2025-12-12
 ### Changed
 - [#57] Update Postfix to 3.10.7
