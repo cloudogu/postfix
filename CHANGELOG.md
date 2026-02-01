@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.9.3-5] - 2026-02-01
+
+### Security
+- CVE fixed: [cve-2025-15467](https://avd.aquasec.com/nvd/2025/cve-2025-15467/)
+
+
 ## [v3.9.3-4] - 2025-04-25
 
 ### Changed
