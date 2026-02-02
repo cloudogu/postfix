@@ -73,6 +73,11 @@ timestamps {
                 ecoSystem.verify("/dogu")
             }
 
+            stage('Finish Release') {
+                String releaseVersion = 'v3.9.8-1'
+                ecoSystem.push('/dogu')
+                github.createReleaseWithChangelog(releaseVersion, changelog, "main")
+            }
 
             if (params.TestDoguUpgrade != null && params.TestDoguUpgrade){
                 stage('Upgrade dogu') {
