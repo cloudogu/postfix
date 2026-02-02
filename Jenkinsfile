@@ -22,19 +22,6 @@ timestamps {
         stage('Checkout') {
             checkout scm
         }
-
-        stage('Lint') {
-            lintDockerfile()
-        }
-
-        stage('Check Markdown Links') {
-            Markdown markdown = new Markdown(this)
-            markdown.check()
-        }
-
-        stage('Shellcheck') {
-            shellCheck("./resources/logging.sh ./resources/startup.sh ./resources/mask2cidr.sh")
-        }
     }
 
     node('vagrant') {

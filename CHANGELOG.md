@@ -6,8 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [v3.9.3-5] - 2026-02-01
-
+## [v3.9.8-1] - 2026-02-01
+### Changed
+- Update Postfix to v3.9.8
 ### Security
 - CVE fixed: [cve-2025-15467](https://avd.aquasec.com/nvd/2025/cve-2025-15467/)
 
