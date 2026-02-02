@@ -9,8 +9,8 @@ ENV POSTFIX_ALPINE_VERSION=3.9.8-r0
 RUN set -o errexit \
   && set -o nounset \
   && set -o pipefail \
-  # && apk update \
-  # && apk upgrade \
+  && apk update \
+  && apk upgrade \
   && apk add --update postfix=${POSTFIX_ALPINE_VERSION} openrc supervisor rsyslog \
   && rm -rf /var/cache/apk/*
 
