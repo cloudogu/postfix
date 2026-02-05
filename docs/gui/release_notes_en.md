@@ -6,7 +6,7 @@ Technical details on a release can be found in the corresponding [Changelog](htt
 
 ## [Unreleased]
 ### Security
-- [#61] CVE fixed [cve-2026-24515](https://avd.aquasec.com/nvd/2025/cve-2026-24515/)
+- [#61] CVE fixed [cve-2026-24515](https://avd.aquasec.com/nvd/2026/cve-2026-24515/)
 
 ## [v3.10.7-2] - 2026-01-29
 ### Security
