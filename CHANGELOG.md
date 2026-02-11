@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v3.9.8-2] - 2026-02-11
+### Security
+- [#63] Fixed [CVE-2025-6965](https://avd.aquasec.com/nvd/2025/cve-2025-6965/)
 ### Changed
 - [#63] Update Base Image to 3.21.6-1
 
