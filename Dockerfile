@@ -1,9 +1,9 @@
 FROM registry.cloudogu.com/official/base:3.21.6-1
 LABEL NAME="official/postfix" \
-      VERSION="3.10.7-3" \
+      VERSION="3.9.8-1" \
       maintainer=hello@cloudogu.com
 
-ENV POSTFIX_ALPINE_VERSION=3.10.7-r0
+ENV POSTFIX_ALPINE_VERSION=3.9.8-r0
 
 # INSTALL POSTFIX
 RUN set -o errexit \
