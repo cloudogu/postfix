@@ -5,50 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
-## [v3.10.7-3] - 2026-02-05
-### Security
-- [#61] CVE fixed [cve-2026-24515](https://avd.aquasec.com/nvd/2026/cve-2026-24515/)
 ### Changed
-- [#61] Update Base Image to 3.23.3-2
-- [#61] Update Makefiles to 10.5.0
-
-## [v3.10.7-2] - 2026-01-29
-### Security
-- [#59] CVE fixed: [cve-2025-15467](https://avd.aquasec.com/nvd/2025/cve-2025-15467/)
-
-## [v3.10.7-1] - 2025-12-12
-### Changed
-- [#57] Update Postfix to 3.10.7
-- [#57] Update Base Image to 3.23.0-1
-
-## [v3.10.5-1] - 2025-11-13
-### Changed
-- [#55] Update Postfix to 3.10.5
-
-## [v3.10.4-1] - 2025-09-03
-### Changed
-- [#52] Update Postfix to 3.10.4
-
-## [v3.10.3-2] - 2025-08-06
-### Changed
-- [#48] Apply network restrictions only in Classic CES environments
-
-## [v3.10.3-1] - 2025-08-05
-### Changed
-- [#50] Update Postfix to 3.10.3
-- [#50] Update base-image to 3.22.0-4
-- [#50] Update makefiles to 10.2.0
-
-## [v3.10.2-2] - 2025-06-11
-### Changed
-- [#46] Update base-image to v3.22.0-2
-
-## [v3.10.2-1] - 2025-06-05
-### Changed
-- [#44] Update Postfix to v3.10.2
-- [#44] Update makefiles to 10.1.0
-- [#44] Updated Base Image to v3.22.0-1
+- [#63] Update Base Image to 3.21.6-1
 
 ## [v3.9.3-4] - 2025-04-25
 ### Changed
