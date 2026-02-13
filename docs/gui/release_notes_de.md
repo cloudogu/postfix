@@ -5,6 +5,8 @@ Im Folgenden finden Sie die Release Notes für das Postfix-Dogu.
 Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https://docs.cloudogu.com/de/docs/dogus/postfix/CHANGELOG/).
 
 ## [Unreleased]
+### Security
+- [#65] Sicherheitslücke geschlossen [CVE-2025-61732](https://avd.aquasec.com/nvd/2026/CVE-2025-61732) und [CVE-2025-68121](https://avd.aquasec.com/nvd/2026/CVE-2025-68121).
 
 ## [v3.10.7-3] - 2026-02-05
 ### Security
