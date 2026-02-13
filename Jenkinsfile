@@ -9,6 +9,7 @@ def pipe = new com.cloudogu.sos.pipebuildlib.DoguPipe(this, [
     doguName           : "postfix",
     shellScripts        : "./resources/logging.sh ./resources/mask2cidr.sh ./resources/startup.sh",
     checkMarkdown       : false,
+    defaultBranch : "master"
 ])
 
 pipe.setBuildProperties()
