@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.10.7-5] - 2026-02-17
+### Changed
+- Upgrade to base image 3.23.3-4; #67
+
 ## [v3.10.7-4] - 2026-02-13
 ### Security
 - [#65] Upgrade base-image to 3.23.3-3

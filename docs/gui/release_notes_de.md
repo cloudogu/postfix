@@ -6,6 +6,10 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 
+## [v3.10.7-5] - 2026-02-17
+### Changed
+- Wir haben nur technische Änderungen vorgenommen. Näheres finden Sie in den Changelogs.
+
 ## [v3.10.7-4] - 2026-02-13
 ### Security
 - [#65] Sicherheitslücke geschlossen [CVE-2025-61732](https://www.tenable.com/cve/CVE-2025-61732) und [CVE-2025-68121](https://nvd.nist.gov/vuln/detail/cve-2025-68121).
