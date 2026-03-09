@@ -5,6 +5,10 @@ Im Folgenden finden Sie die Release Notes für das Postfix-Dogu.
 Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https://docs.cloudogu.com/de/docs/dogus/postfix/CHANGELOG/).
 
 ## [Unreleased]
+### Changed
+- [#69] Update Postfix auf 3.10.8
+### Security
+- [#69] CVE behoben [CVE-2026-22184](https://avd.aquasec.com/nvd/2026/cve-2026-22184/)
 
 ## [v3.10.7-5] - 2026-02-17
 ### Changed
