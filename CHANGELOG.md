@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - [#69] Update Postfix to 3.10.8
 ### Security
-- [#69] CVE fixed: [CVE-2026-22184](https://avd.aquasec.com/nvd/2026/cve-2026-22184/)
+- [#69] CVE fixed [CVE-2026-22184](https://avd.aquasec.com/nvd/2026/cve-2026-22184/)
 
 ## [v3.10.7-5] - 2026-02-17
 ### Changed
