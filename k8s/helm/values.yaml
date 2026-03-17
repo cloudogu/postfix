@@ -1,0 +1,75 @@
+global:
+  imagePullSecrets:
+    - name: "ces-container-registries"
+networkPolicies:
+  enabled: true
+replicas: 1
+resourceLimits:
+  memory: 101Mi
+resourceRequests:
+  cpu: 15m
+  memory: 101Mi
+securityContext:
+  fsGroup: 1000
+  fsGroupChangePolicy: OnRootMismatch
+  runAsNonRoot: true
+service:
+  ports:
+    smtp:
+      protocol: TCP
+      port: 25
+      targetPort: 25
+    msa:
+      protocol: TCP
+      port: 587
+      targetPort: 587
+configuration:
+  meta:
+    global:
+      name: global-config
+      key: config.yaml
+    normal:
+      key: normal
+    sensitive:
+      key: sensitive
+  normal: # in config.yaml style
+    relayhost: "n/a"
+    logging:
+      root: "WARN"
+  secretRefs:
+    ldapPassword:
+      name: postfix-ldap
+      key: password
+    ldapUsername:
+      name: postfix-ldap
+      key: username
+    oidcClientSecret:
+      name: postfix-oidc
+      key: clientSecret
+      optional: true
+containers:
+  postfix:
+    image:
+      registry: registry.cloudogu.com
+      repository: official/postfix
+      tag: 3.10.8-1
+    imagePullPolicy: IfNotPresent
+    securityContext:
+      capabilities:
+        add:
+          - CHOWN
+          - DAC_OVERRIDE
+          - FOWNER
+          - FSETID
+          - KILL
+          - NET_BIND_SERVICE
+          - SETGID
+          - SETPCAP
+          - SETUID
+        drop:
+          - ALL
+      privileged: false
+      readOnlyRootFilesystem: false
+      runAsGroup: 1000
+      runAsNonRoot: true
+      runAsUser: 1000

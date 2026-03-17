@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: component-spec-{{ include "postfix.name" . }}
+  labels: {{ include "postfix.labels" . | nindent 4 }}
+data:
+  current: "{{ .Chart.AppVersion }}"
+  "{{ .Chart.AppVersion }}": |
+    {{ .Files.Get "dogu.json" | nindent 4 }}
