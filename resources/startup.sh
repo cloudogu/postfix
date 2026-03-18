@@ -34,7 +34,7 @@ MAILRELAY=$(doguctl config relayhost)
 NAME=$(hostname)
 DOMAIN=$(doguctl config --global domain)
 POSTFIX_SASL_USER=$(doguctl config --default "NOT_SET" sasl_username)
-POSTFIX_SASL_PASSWORD=$(doguctl config --default "NOT_SET" sasl_password)
+POSTFIX_SASL_PASSWORD=$(doguctl config -e --default "NOT_SET" sasl_password)
 NET=""
 OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
   'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'
