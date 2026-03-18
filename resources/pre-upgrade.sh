@@ -3,7 +3,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-function run_preupgrade() {
+function runPreUpgrade() {
   FROM_VERSION="${1}"
   TO_VERSION="${2}"
 
@@ -15,11 +15,7 @@ function run_preupgrade() {
   fi
 
   if [[ "$(doguctl multinode)" = "false" ]]; then
-    # we have no local state volume, so local state is not available in multinode
-    # writing to the encrypted config is not possible in multinode either
-
-    echo "Set registry flag so startup script waits for post-upgrade to finish..."
-    doguctl config "local_state" "upgrading"
+    # writing to the encrypted config is not possible in multinode
 
     if versionXLessOrEqualThanY "${FROM_VERSION}" "3.10.8-1" ; then
       saslPassword="$(doguctl config --default unset sasl_password)"
@@ -27,8 +23,6 @@ function run_preupgrade() {
         doguctl config -e sasl_password "${saslPassword}"
       fi
     fi
-
-    doguctl config --rm "local_state"
   fi
 }
 
@@ -91,5 +85,5 @@ function versionXLessOrEqualThanY() {
 
 # make the script only run when executed, not when sourced from bats tests
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  run_preupgrade "$@"
+  runPreUpgrade "$@"
 fi
