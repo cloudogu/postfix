@@ -7,10 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Set `sasl_password` configuration option to `encrypted`.
-  - This is a *Breaking Change* for users of the `sasl_password` configuration option.
-  - In multinode environments, you must move the option from the `postfix-config` configmap to the secret with the same name.
-  - In classic environments, it is easiest to exec into the container and read the value with `doguctl config sasl_password`
-    and rewrite it encrypted with `doguctl config -e sasl_password <value>`.
+  - In classic environments, this migration is done automatically during the upgrade.
+  - In multinode environments, a migration is not necessary but recommended.
+    To do that, you can move the option from the `postfix-config` configmap to the secret with the same name.
 - [#72] Build postfix as a helm chart as well as a normal dogu.
 
 ## [v3.10.8-1] - 2026-03-09
