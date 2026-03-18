@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/default-container: cas
+        kubectl.kubernetes.io/default-container: postfix
       labels:
         {{ include "postfix.labels" . | nindent 8 }}
     spec:
@@ -36,6 +36,8 @@ spec:
             valueFrom:
               secretKeyRef: {{ toYaml $value | nindent 16 }}
           {{- end }}
+          image: "{{ .Values.containers.postfix.image.registry }}{{ if .Values.containers.postfix.image.registry }}/{{ end }}{{ .Values.containers.postfix.image.repository }}:{{ .Values.containers.postfix.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.containers.postfix.imagePullPolicy }}
           livenessProbe:
             failureThreshold: 180
             periodSeconds: 10
@@ -43,11 +45,11 @@ spec:
             tcpSocket:
               port: 8080
             timeoutSeconds: 1
-          name: cas
+          name: postfix
           resources:
             limits: {{ toYaml .Values.resourceLimits | nindent 14 }}
             requests: {{ toYaml .Values.resourceRequests | nindent 14 }}
-          securityContext: {{ toYaml .Values.containers.cas.securityContext | nindent 12 }}
+          securityContext: {{ toYaml .Values.containers.postfix.securityContext | nindent 12 }}
           startupProbe:
             exec:
               command:
