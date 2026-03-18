@@ -31,17 +31,11 @@ spec:
             value: "true"
           - name: RUNTIME_MODE
             value: "component"
-          - name: LDAP_PASSWORD
+          {{- range $key, $value := .Values.configuration.envsFromSecrets }}
+          - name: {{ $key }}
             valueFrom:
-              secretKeyRef: {{ toYaml .Values.configuration.secretRefs.ldapPassword | nindent 16 }}
-          - name: LDAP_USERNAME
-            valueFrom:
-              secretKeyRef: {{ toYaml .Values.configuration.secretRefs.ldapUsername | nindent 16 }}
-          - name: OIDC_CLIENT_SECRET
-            valueFrom:
-              secretKeyRef: {{ toYaml .Values.configuration.secretRefs.oidcClientSecret | nindent 16 }}
-          image: "{{ .Values.containers.cas.image.registry }}{{ if .Values.containers.cas.image.registry }}/{{ end }}{{ .Values.containers.cas.image.repository }}:{{ .Values.containers.cas.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.containers.cas.imagePullPolicy }}
+              secretKeyRef: {{ toYaml $value | nindent 16 }}
+          {{- end }}
           livenessProbe:
             failureThreshold: 180
             periodSeconds: 10

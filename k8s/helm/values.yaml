@@ -36,16 +36,18 @@ configuration:
     relayhost: "n/a"
     logging:
       root: "WARN"
-  secretRefs:
-    ldapPassword:
-      name: postfix-ldap
-      key: password
-    ldapUsername:
-      name: postfix-ldap
-      key: username
-    oidcClientSecret:
-      name: postfix-oidc
-      key: clientSecret
+  envsFromSecretKeyRefs:
+    SASL_PASSWORD:
+      name: postfix-secrets
+      key: saslPassword
+      optional: true
+    SMTP_TLS_CERT_FILE:
+      name: postfix-secrets
+      key: smtpTlsCertFile
+      optional: true
+    SMTP_TLS_KEY_FILE:
+      name: postfix-secrets
+      key: smtpTlsKeyFile
       optional: true
 containers:
   postfix:
