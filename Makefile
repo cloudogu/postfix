@@ -30,14 +30,14 @@ $(HELM_DOGU_SPEC): dogu.json
 .PHONY: helm-values-update-image-version
 helm-values-update-image-version: $(BINARY_YQ)
 	@echo "Updating the image version in source values.yaml to ${VERSION}..."
-	@$(BINARY_YQ) -i e ".containers.cas.image.tag = \"${VERSION}\"" ${K8S_COMPONENT_SOURCE_VALUES}
+	@$(BINARY_YQ) -i e ".containers.postfix.image.tag = \"${VERSION}\"" ${K8S_COMPONENT_SOURCE_VALUES}
 
 .PHONY: helm-values-replace-image-repo
 helm-values-replace-image-repo: $(BINARY_YQ)
 	@if [[ ${STAGE} == "development" ]]; then \
       		echo "Setting dev image repo in target values.yaml!" ;\
-    		$(BINARY_YQ) -i e ".containers.cas.image.registry=\"$(shell echo '${IMAGE_DEV}' | sed 's/\([^\/]*\)\/\(.*\)/\1/')\"" ${K8S_COMPONENT_TARGET_VALUES} ;\
-    		$(BINARY_YQ) -i e ".containers.cas.image.repository=\"$(shell echo '${IMAGE_DEV}' | sed 's/\([^\/]*\)\/\(.*\)/\2/')\"" ${K8S_COMPONENT_TARGET_VALUES} ;\
+    		$(BINARY_YQ) -i e ".containers.postfix.image.registry=\"$(shell echo '${IMAGE_DEV}' | sed 's/\([^\/]*\)\/\(.*\)/\1/')\"" ${K8S_COMPONENT_TARGET_VALUES} ;\
+    		$(BINARY_YQ) -i e ".containers.postfix.image.repository=\"$(shell echo '${IMAGE_DEV}' | sed 's/\([^\/]*\)\/\(.*\)/\2/')\"" ${K8S_COMPONENT_TARGET_VALUES} ;\
     	fi
 
 .PHONY: template-log-level
@@ -51,5 +51,5 @@ template-log-level: ${BINARY_YQ}
 template-image-pull-policy: $(BINARY_YQ)
 	@if [[ "${STAGE}" == "development" ]]; then \
           echo "Setting pull policy to always!" ; \
-          $(BINARY_YQ) -i e ".containers.cas.imagePullPolicy=\"Always\"" "${K8S_COMPONENT_TARGET_VALUES}" ; \
+          $(BINARY_YQ) -i e ".containers.postfix.imagePullPolicy=\"Always\"" "${K8S_COMPONENT_TARGET_VALUES}" ; \
     fi
