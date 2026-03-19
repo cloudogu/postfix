@@ -70,6 +70,10 @@ def componentStages = { group ->
             echo "[Component k3d] Start cluster"
             k3d.startK3d()
 
+            echo "[Component k3d] Prepare prerequisites"
+            k3d.kubectl("delete configmap global-config || true")
+            k3d.kubectl("create configmap global-config --from-literal=config.yaml='domain: \"ces.test\"'")
+
             echo "[Component k3d] Generate helm chart"
             runMakeInGoContainer("helm-generate")
 
