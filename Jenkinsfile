@@ -5,6 +5,9 @@
   'dogu-build-lib'
 ]) _
 
+import com.cloudogu.ces.cesbuildlib.K3d
+import com.cloudogu.ces.cesbuildlib.Makefile
+
 def pipe = new com.cloudogu.sos.pipebuildlib.DoguPipe(this, [
     doguName           : "postfix",
     shellScripts        : "./resources/logging.sh ./resources/mask2cidr.sh ./resources/startup.sh",
