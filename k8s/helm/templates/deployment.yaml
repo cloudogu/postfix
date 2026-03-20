@@ -43,23 +43,13 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             tcpSocket:
-              port: 8080
+              port: 25
             timeoutSeconds: 1
           name: postfix
           resources:
             limits: {{ toYaml .Values.resourceLimits | nindent 14 }}
             requests: {{ toYaml .Values.resourceRequests | nindent 14 }}
           securityContext: {{ toYaml .Values.containers.postfix.securityContext | nindent 12 }}
-          startupProbe:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - '[ $(doguctl state) == "ready" ]'
-            failureThreshold: 180
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           volumeMounts:
             - mountPath: /var/ces/state
               name: postfix-ephemeral
