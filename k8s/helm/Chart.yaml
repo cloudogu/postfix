@@ -1,5 +1,5 @@
 apiVersion: v2
-name: postfix-component
+name: postfix
 description: A Helm chart for postfix, the LOP's mail server.
 
 # A chart can be either an 'application' or a 'library' chart.

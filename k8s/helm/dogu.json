@@ -157,12 +157,6 @@
       }
     }
   ],
-  "ExposedCommands": [
-    {
-      "Name": "pre-upgrade",
-      "Command": "/pre-upgrade.sh"
-    }
-  ],
   "HealthChecks": [
     {
       "Type": "tcp",
