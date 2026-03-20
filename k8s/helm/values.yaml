@@ -72,6 +72,4 @@ containers:
           - ALL
       privileged: false
       readOnlyRootFilesystem: false
-      runAsGroup: 1000
-      runAsNonRoot: true
-      runAsUser: 1000
+      runAsNonRoot: false
