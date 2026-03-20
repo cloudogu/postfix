@@ -19,7 +19,7 @@ def componentRegistry = "registry.cloudogu.com"
 def componentRegistryNamespace = "k8s"
 def componentChartTargetDir = "target/k8s/helm"
 def componentBuildImageRepository = "registry.cloudogu.com/official/postfix"
-def componentReleaseName = "postfix"
+def componentReleaseName = "postfix-component"
 def goVersion = "1.26.0"
 
 pipe.setBuildProperties()
