@@ -73,3 +73,11 @@ containers:
       privileged: false
       readOnlyRootFilesystem: false
       runAsNonRoot: false
+    extraVolumeMounts: []
+    extraEnv: []
+extraLabels: {}
+tolerations: []
+affinity: {}
+nodeSelector: {}
+extraVolumes: []
+extraInitContainers: []
