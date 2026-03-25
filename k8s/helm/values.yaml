@@ -58,16 +58,6 @@ containers:
     imagePullPolicy: IfNotPresent
     securityContext:
       capabilities:
-        add:
-          - CHOWN
-          - DAC_OVERRIDE
-          - FOWNER
-          - FSETID
-          - KILL
-          - NET_BIND_SERVICE
-          - SETGID
-          - SETPCAP
-          - SETUID
         drop:
           - ALL
       privileged: false
