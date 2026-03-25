@@ -4,7 +4,6 @@ metadata:
   name: {{ include "postfix.name" . }}-config
   labels: {{ include "postfix.labels" . | nindent 4 }}
 data:
-  normal: |
-    {{ toYaml .Values.configuration.normal | nindent 4 }}
+  normal: |{{ toYaml .Values.configuration.normal | nindent 4 }}
   sensitive: |
     {}
