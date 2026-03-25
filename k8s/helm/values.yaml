@@ -58,6 +58,10 @@ containers:
     imagePullPolicy: IfNotPresent
     securityContext:
       capabilities:
+        add:
+          - SETGID
+          - SETUID
+          - DAC_OVERRIDE
         drop:
           - ALL
       privileged: false
