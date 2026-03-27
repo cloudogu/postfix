@@ -1,0 +1,12 @@
+apiVersion: v1
+values:
+  images:
+    postfix: registry.cloudogu.com/official/postfix:3.10.8-2
+patches:
+  values.yaml:
+    containers:
+      postfix:
+        image:
+          registry: "{{ registryFrom .images.postfix }}"
+          repository: "{{ repositoryFrom .images.postfix }}"
+          tag: "{{ tagFrom .images.postfix }}"

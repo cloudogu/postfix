@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.10.8-2] - 2026-03-27
+### Changed
+- Set `sasl_password` configuration option to `encrypted`.
+  - In classic environments, this migration is done automatically during the upgrade.
+  - In multinode environments, a migration is not necessary but recommended.
+    To do that, you can move the option from the `postfix-config` configmap to the secret with the same name.
+- [#72] Build postfix as a helm chart as well as a normal dogu.
+
 ## [v3.10.8-1] - 2026-03-09
 ### Changed
 - [#69] Update Postfix to 3.10.8
