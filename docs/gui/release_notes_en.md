@@ -6,6 +6,9 @@ Technical details on a release can be found in the corresponding [Changelog](htt
 
 ## [Unreleased]
 
+## [v3.10.8-2] - 2026-03-27
+- [#72] Only technical changes were made to release Postfix as a component.
+
 ## [v3.10.8-1] - 2026-03-09
 ### Changed
 - [#69] Update Postfix to 3.10.8
