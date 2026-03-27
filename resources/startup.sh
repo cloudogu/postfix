@@ -17,6 +17,15 @@ function setValueIfConfigured {
 function writeIntoFileAndSetIfConfigured {
   OPTION_NAME="${1}"
   FILE_NAME="${2}"
+
+  ENV_NAME="${OPTION_NAME^^}"
+  if [[ "${RUNTIME_MODE:-}" = 'component' ]] && [[ -n "${!ENV_NAME:-}" ]]; then
+    echo "${!ENV_NAME}" >"${FILE_NAME}"
+    chmod 600 "${FILE_NAME}"
+    postconf -e "${OPTION_NAME}"="${FILE_NAME}"
+    return 0
+  fi
+
   if [[ "$#" -gt 2 ]]; then
     PARAM="${3}"
   else
@@ -34,7 +43,11 @@ MAILRELAY=$(doguctl config relayhost)
 NAME=$(hostname)
 DOMAIN=$(doguctl config --global domain)
 POSTFIX_SASL_USER=$(doguctl config --default "NOT_SET" sasl_username)
-POSTFIX_SASL_PASSWORD=$(doguctl config --default "NOT_SET" sasl_password)
+if [[ "${RUNTIME_MODE:-}" = 'component' ]]; then
+  POSTFIX_SASL_PASSWORD="${SASL_PASSWORD:-}"
+else
+  POSTFIX_SASL_PASSWORD=$(doguctl config -e --default "NOT_SET" sasl_password)
+fi
 NET=""
 OPTIONS=('smtp_tls_security_level' 'smtp_tls_loglevel'
   'smtp_tls_exclude_ciphers' 'smtp_tls_mandatory_ciphers'

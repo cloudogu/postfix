@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "postfix.name" . }}
+  labels:
+    control-plane: controller-manager
+    {{ include "postfix.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas | default 1 }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{ include "postfix.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: postfix
+        config/checksum: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+      labels:
+        {{ include "postfix.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: ECOSYSTEM_MULTINODE
+              value: "true"
+            - name: RUNTIME_MODE
+              value: "component"
+            {{- range $key, $value := .Values.configuration.envsFromSecretKeyRefs }}
+            - name: {{ $key }}
+              valueFrom:
+                secretKeyRef: {{ toYaml $value | nindent 18 }}
+            {{- end }}
+            {{- with .Values.containers.postfix.extraEnv }}
+            {{ toYaml . | nindent 12 }}
+            {{- end }}
+          image: "{{ .Values.containers.postfix.image.registry }}{{ if .Values.containers.postfix.image.registry }}/{{ end }}{{ .Values.containers.postfix.image.repository }}:{{ .Values.containers.postfix.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.containers.postfix.imagePullPolicy }}
+          livenessProbe:
+            failureThreshold: 180
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: {{ .Values.service.ports.smtp.port }}
+            timeoutSeconds: 1
+          name: postfix
+          resources:
+            limits: {{ toYaml .Values.resourceLimits | nindent 14 }}
+            requests: {{ toYaml .Values.resourceRequests | nindent 14 }}
+          securityContext: {{ toYaml .Values.containers.postfix.securityContext | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/ces/state
+              name: postfix-ephemeral
+              subPath: state
+            - mountPath: /etc/ces/config
+              name: ces-config
+              readOnly: true
+            - mountPath: /etc/ces/dogu_json/postfix
+              name: postfix-dogu-json
+              readOnly: true
+            {{- with .Values.containers.postfix.extraVolumeMounts }}
+            {{ toYaml . | nindent 12 }}
+            {{- end }}
+      {{- with .Values.extraInitContainers }}
+      initContainers: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      enableServiceLinks: false
+      hostname: postfix
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{ toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext: {{ toYaml .Values.securityContext | nindent 8 }}
+      volumes:
+        - emptyDir: { }
+          name: postfix-ephemeral
+        - name: ces-config
+          projected:
+            sources:
+              - configMap:
+                  name: {{ .Values.configuration.meta.global.name }}
+                  items:
+                    - key: {{ .Values.configuration.meta.global.key }}
+                      path: global/config.yaml
+              - configMap:
+                  name: {{ include "postfix.name" . }}-config
+                  items:
+                    - key: {{ .Values.configuration.meta.normal.key }}
+                      path: normal/config.yaml
+                    - key: {{ .Values.configuration.meta.sensitive.key }}
+                      path: sensitive/config.yaml
+        - configMap:
+            name: component-spec-{{ include "postfix.name" . }}
+          name: postfix-dogu-json
+        {{- with .Values.extraVolumes }}
+        {{ toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector: {{ toYaml . | nindent 8 }}
+      {{- end }}
