@@ -6,6 +6,10 @@ Technical details on a release can be found in the corresponding [Changelog](htt
 
 ## [Unreleased]
 
+## [v3.10.8-3] - 2026-04-29
+### Security
+- [#75] Fix [CVE-2026-31789](https://nvd.nist.gov/vuln/detail/CVE-2026-31789)
+
 ## [v3.10.8-2] - 2026-03-27
 - [#72] Only technical changes were made to release Postfix as a component.
 

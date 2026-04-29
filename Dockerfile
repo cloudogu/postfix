@@ -1,6 +1,6 @@
-FROM registry.cloudogu.com/official/base:3.23.3-4
+FROM registry.cloudogu.com/official/base:3.23.4-1
 LABEL NAME="official/postfix" \
-      VERSION="3.10.8-2" \
+      VERSION="3.10.8-3" \
       maintainer=hello@cloudogu.com
 
 ENV POSTFIX_ALPINE_VERSION=3.10.8-r0
