@@ -54,7 +54,7 @@ containers:
     image:
       registry: registry.cloudogu.com
       repository: official/postfix
-      tag: 3.11.1-0
+      tag: 3.11.3-0
     imagePullPolicy: IfNotPresent
     securityContext:
       capabilities:
