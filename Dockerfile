@@ -1,4 +1,4 @@
-FROM registry.cloudogu.com/official/base:3.23.4-1
+FROM registry.cloudogu.com/official/base:3.24.0-1
 LABEL NAME="official/postfix" \
       VERSION="3.11.3-0" \
       maintainer=hello@cloudogu.com
@@ -11,6 +11,7 @@ RUN set -o errexit \
   && set -o pipefail \
   && apk update \
   && apk upgrade \
+  && apk dist-upgrade \
   && apk add --update postfix=${POSTFIX_ALPINE_VERSION} openrc supervisor rsyslog \
   && rm -rf /var/cache/apk/*
 
