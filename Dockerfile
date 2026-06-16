@@ -11,7 +11,6 @@ RUN set -o errexit \
   && set -o pipefail \
   && apk update \
   && apk upgrade \
-  && apk dist-upgrade \
   && apk add --update postfix=${POSTFIX_ALPINE_VERSION} openrc supervisor rsyslog \
   && rm -rf /var/cache/apk/*
 
