@@ -6,7 +6,7 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 ### Changed
-- [#74] Update Postfix auf 3.11.3
+- [#74] Update Postfix auf 3.11.4
 
 ## [v3.10.8-3] - 2026-04-29
 ### Security
