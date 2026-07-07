@@ -6,6 +6,10 @@ Technical details on a release can be found in the corresponding [Changelog](htt
 
 ## [Unreleased]
 
+## [v3.11.4-1] - 2026-07-07
+### Changed
+- [#74] Update Postfix to 3.11.4
+
 ## [v3.10.8-3] - 2026-04-29
 ### Security
 - [#75] Fix [CVE-2026-31789](https://nvd.nist.gov/vuln/detail/CVE-2026-31789)
@@ -37,7 +41,7 @@ Technical details on a release can be found in the corresponding [Changelog](htt
 
 ## [v3.10.7-1] - 2025-12-12
 ### Changed
-- [#57] Update Postfix auf 3.10.7
+- [#57] Update Postfix to 3.10.7
 
 ## [v3.10.5-1] - 2025-11-13
 ### Changed
