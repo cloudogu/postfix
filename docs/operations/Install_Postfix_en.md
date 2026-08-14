@@ -6,23 +6,32 @@ title: "Installation of the Postfix dogu"
 
 ## Prerequisite
 
-For a successful installation of Postfix, a value for the Postfix relay host must be configured in the etcd of the CES.
-This is usually already set during the setup of the CES. However, this value is deleted when the dogu is removed via the
-purge command. The value must then be reset before reinstalling the Postfix. This can be done with the following
-command:
+For a successful installation of Postfix, a value for the Postfix relay host must be configured in the CES.
+This is usually already set during the setup of the CES. The relayhost can be set with the following command:
 
-``` 
-etcdctl set /config/postfix/relayhost <value for the relay host>
-```
+`kubectl edit configmap -n ecosystem postfix-config`
+````yaml
+    data:
+      config.yaml: |
+        relayhost: "192.168.1.1"
+````
 
 Translated with www.DeepL.com/Translator (free version)
 
 ## Installation
 
-Postfix can be easily installed via `cesapp` like all other dogus:
+Postfix can be easily installed via `kubectl` like all other dogus:
 
-```
-cesapp install official/postfix
-```
-
-Translated with www.DeepL.com/Translator (free version)
+````bash
+kubectl apply -n ecosystem -f - <<EOF
+apiVersion: k8s.cloudogu.com/v2
+kind: Dogu 
+  metadata: 
+    name: postfix
+labels:
+  app: ces
+spec:
+  name: official/postfix
+  version: 3.11.4-1
+EOF
+````

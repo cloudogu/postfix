@@ -10,16 +10,14 @@ title: "Konfiguration des Postfix-Dogu"
 
 ## Konfigurationsmöglichkeiten
 
-Das Postfix-Dogu wird über die etcd-Registry konfiguriert. Es gibt mehrere Möglichkeiten, um Werte in der etcd-Registry
-zu konfigurieren. Kurzgefasst kann man:
+Es gibt mehrere Möglichkeiten, um Werte zu konfigurieren. 
+Kurzgefasst kann man:
 
-1. Das Postfix-Dogu mit `cesapp edit-config postfix` konfigurieren (empfohlen)
+1. Das Postfix-Dogu mit `kubectl edit configmap -n ecosystem postfix-config` konfigurieren (empfohlen)
 2. Die Konfigurations-Werte mithilfe eines Blueprint aktualisieren
-3. Die Schlüssel mit `etcdctl` manuell anpassen
 
 ## Konfiguration
 
-Alle Konfigurationsschlüssel für die Einstellungen des Postfix haben das Schlüsselpräfix `config/postfix/`. Das
 Postfix-Dogu bietet die folgenden Einstellungen:
 
 ### Relay-Host
@@ -27,10 +25,6 @@ Postfix-Dogu bietet die folgenden Einstellungen:
 * Pfad des Konfigurationsschlüssels: `relayhost`
 * Das Next-Hop-Ziel von nicht-lokalen Mails
 * Wird in der Regel bereits bei der Einrichtung des CES gesetzt.
-* Der Wert muss dann vor der Installation von Postfix gesetzt werden. Dies kann mit folgendem Befehl geschehen:
-  ```
-  etcdctl set /config/postfix/relayhost <Wert für den Relayhost>
-  ```
 
 ### SASL Authentifizierung
 
