@@ -10,12 +10,12 @@ einen lokalen Pseudo-SMTP-Server ein.
 
 ## Einrichtung von Mailpit im Cluster
 
-Kurz zusammengefasst wird MailHog lokal auf dem Host-Rechner als Docker-Container ausgeführt und im lokalen CES als
+Kurz zusammengefasst wird Mailpit lokal auf dem Host-Rechner als Docker-Container ausgeführt und im lokalen CES als
 Relay-Host des Postfix-Dogus eingetragen.
 
 Konkret müssen folgende Schritte ausgeführt werden:
 
-* MailHog im Cluster installieren:
+* Mailpit im Cluster installieren:
   ```bash
   cat <<EOF | kubectl apply -f - 
   apiVersion: apps/v1
@@ -113,7 +113,7 @@ Konkret müssen folgende Schritte ausgeführt werden:
   ```
   kubectl port-forward -n ecosystem service/mailpit 8025:8025
   ```
-* In Web-Oberfläche vom MailHog - ```localhost:8025``` - Mail-Empfang prüfen
+* In Web-Oberfläche vom Mailpit - ```localhost:8025``` - Mail-Empfang prüfen
 
 ## Mit Authentifizierung testen
 
