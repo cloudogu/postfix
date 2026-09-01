@@ -24,17 +24,15 @@ This article is suitable for all those who want to develop on the Postfix dogu.
 
 ### Prerequisites
 
-- A running Vagrant machine for the CES
+- a running multinode cluster
+- the kubectx set to the cluster
 
 ### Postfix Dogu build
 
-The build process of the Dogus is always executed in the Vagrant machine.
-
-1. change to the root directory of the Postfix dogu (in vagrant)
-2. build the dogu
+1. build the dogu
 
 ```
-   cesapp build .
+   make build
 ```
 
 Now the dogu should be built, updated, and started automatically.
