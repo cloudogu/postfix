@@ -24,17 +24,16 @@ Dieser Artikel ist für all jene geeignet, welche an dem Postfix-Dogu entwickeln
 
 ### Voraussetzungen
 
-- Eine laufende Vagrant-Maschine für das CES
+- ein laufendes Multi-Node-Cluster
+- gesetzter kubectx des Clusters
 
 ### Postfix-Dogu Bauen
 
-Der Buildprozess des Dogus wird immer in der Vagrant-Maschine ausgeführt.
 
-1. Wechsel in das Root-Verzeichnis des Postfix-Dogus (in vagrant)
-2. Baue das Dogu
+1. Baue das Dogu
 
 ```
-   cesapp build .
+   make build
 ```
 
 Jetzt sollte das Dogu automatisch gebaut, aktualisiert, und gestartet werden.

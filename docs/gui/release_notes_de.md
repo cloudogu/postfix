@@ -6,6 +6,10 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 
+## [v3.11.6-2] - 2026-09-02
+### Changed
+- Die Dokumentation veralteter Versionen wurde entfernt. Referenzen auf Classic-CES wurden durch MN-CES ersetzt.
+
 ## [v3.11.6-1] - 2026-08-14
 ### Changed
 - [#85] Update Postfix auf v3.11.6
