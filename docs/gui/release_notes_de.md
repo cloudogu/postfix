@@ -6,6 +6,13 @@ Technische Details zu einem Release finden Sie im zugehörigen [Changelog](https
 
 ## [Unreleased]
 
+## [v3.11.7-1] - 2026-09-17
+### Changed
+- [#89] Update Postfix auf v3.11.7
+
+### Security
+- [#89] Sicherheitslücke [CVE-2026-56854](https://nvd.nist.gov/vuln/detail/CVE-2026-56854) geschlossen
+
 ## [v3.11.6-2] - 2026-09-02
 ### Changed
 - Die Dokumentation veralteter Versionen wurde entfernt. Referenzen auf Classic-CES wurden durch MN-CES ersetzt.

@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.11.7-1] - 2026-09-17
+### Changed
+- [#89] Update Postfix to v3.11.7
+- [#89] Update base image to v3.24.1-3
+
+### Security
+- [#89] Fix [CVE-2026-56854](https://nvd.nist.gov/vuln/detail/CVE-2026-56854)
+
 ## [v3.11.6-2] - 2026-09-02
 ### Added
 - [#82] update docs for multinode
